@@ -87,7 +87,9 @@ var defaultStones = [
   'broken-headstone.png',
   'cracked-headstone.png',
   'coffin-gravestone.png',
-  '3ball-gravestone.png'
+  '3ball-gravestone.png',
+  'photos/pointy-gravestone.png',
+  'photos/skull-gravestone.png'
 ];
 
 function loadGravestones() {

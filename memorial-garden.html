@@ -13,27 +13,8 @@
       radial-gradient(ellipse at 25% 95%, rgba(0,30,15,0.5) 0%, transparent 45%);
     min-height: 100vh;
   }
-  /* Moon */
-  .moon {
-    position: fixed;
-    top: 28px; right: 28px;
-    width: 90px; height: 90px;
-    background: radial-gradient(circle at 35% 35%, #fffff8, #fffde0 40%, #e0e0c0);
-    border-radius: 50%;
-    box-shadow:
-      0 0 20px 8px rgba(255,255,200,0.15),
-      0 0 60px 20px rgba(255,255,180,0.08);
-    z-index: 0;
-    pointer-events: none;
-  }
-  /* Bats */
-  @keyframes bat1 { 0%{transform:translate(0,0) scaleX(1)} 30%{transform:translate(80px,-40px) scaleX(-1)} 60%{transform:translate(150px,-10px) scaleX(1)} 100%{transform:translate(0,0) scaleX(1)} }
-  @keyframes bat2 { 0%{transform:translate(0,0) scaleX(-1)} 40%{transform:translate(-60px,-50px) scaleX(1)} 80%{transform:translate(-130px,-20px) scaleX(-1)} 100%{transform:translate(0,0) scaleX(-1)} }
-  @keyframes bat3 { 0%{transform:translate(0,0)} 50%{transform:translate(50px,-70px)} 100%{transform:translate(0,0)} }
-  .bat-svg { position: fixed; pointer-events: none; z-index: 6; opacity: 0.65; }
-  .bat-svg:nth-child(1) { top: 80px; left: 15%; animation: bat1 9s ease-in-out infinite; }
-  .bat-svg:nth-child(2) { top: 60px; right: 20%; animation: bat2 12s ease-in-out infinite; }
-  .bat-svg:nth-child(3) { top: 120px; left: 50%; animation: bat3 7s ease-in-out infinite; }
+  /* Moon replaced by GIF */
+
 
   /* Fog */
   @keyframes fog1 { 0%{transform:translateX(-15%);opacity:0} 20%{opacity:0.5} 80%{opacity:0.5} 100%{transform:translateX(15%);opacity:0} }
@@ -128,15 +109,10 @@
 </head>
 <body class="memorial">
 
-<!-- Moon -->
-<div class="moon"></div>
 
-<!-- Bats -->
-<svg class="bat-svg" width="28" height="16" viewBox="0 0 28 16" xmlns="http://www.w3.org/2000/svg">
-  <path d="M14,8 Q8,2 2,4 Q6,8 4,12 Q8,10 10,12 Q12,9 14,8Z" fill="#1a0020"/>
-  <path d="M14,8 Q20,2 26,4 Q22,8 24,12 Q20,10 18,12 Q16,9 14,8Z" fill="#1a0020"/>
-  <circle cx="14" cy="8" r="2.5" fill="#1a0020"/>
-</svg>
+<!-- Bats & Moon GIF -->
+<img src="flying-bats-moon.gif" alt="" style="position:fixed;top:0;right:0;width:min(420px,55vw);pointer-events:none;z-index:4;mix-blend-mode:screen;opacity:0.75;">
+
 <svg class="bat-svg" width="22" height="13" viewBox="0 0 22 13" xmlns="http://www.w3.org/2000/svg">
   <path d="M11,6 Q6,1 1,3 Q4,6 3,10 Q6,8 8,10 Q9,7 11,6Z" fill="#15001a"/>
   <path d="M11,6 Q16,1 21,3 Q18,6 19,10 Q16,8 14,10 Q13,7 11,6Z" fill="#15001a"/>
