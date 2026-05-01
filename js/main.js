@@ -82,6 +82,7 @@ function enterMemorialGarden() {
 })();
 
 // ---- LOAD JSON & RENDER GRAVESTONES ----
+var stoneStyles = ['stone-rounded', 'stone-gothic', 'stone-tablet'];
 function loadGravestones() {
   var grid = document.getElementById('grave-grid');
   if (!grid) return;
@@ -90,10 +91,11 @@ function loadGravestones() {
     .then(function (stones) {
       var countEl = document.getElementById('grave-count');
       if (countEl) countEl.textContent = stones.length;
-      grid.innerHTML = stones.map(function (s) {
-        var tilt = (Math.random() * 6 - 3).toFixed(1);
+      grid.innerHTML = stones.map(function (s, i) {
+        var tilt = (Math.random() * 8 - 4).toFixed(1);
+        var style = stoneStyles[i % stoneStyles.length];
         return [
-          '<div class="gravestone" style="transform:rotate(' + tilt + 'deg)">',
+          '<div class="gravestone ' + style + '" style="transform:rotate(' + tilt + 'deg)">',
             deathHeadSVG(),
             '<div class="stone-name">' + esc(s.name) + '</div>',
             s.dates ? '<div class="stone-dates">' + esc(s.dates) + '</div>' : '',
@@ -156,13 +158,14 @@ function loadMapPins(map) {
                 ';border:2px solid #000;box-shadow:0 0 6px ' + color + '"></div>',
           iconSize: [14, 14], iconAnchor: [7, 7], className: ''
         });
+        var popupHtml =
+          (p.photo ? '<img src="' + esc(p.photo) + '" style="width:160px;height:110px;object-fit:cover;display:block;border:2px solid ' + color + ';margin-bottom:6px">' : '') +
+          '<b style="font-size:1.05em">' + esc(p.name) + '</b><br>' +
+          (p.location   ? '<span style="color:#666;font-size:0.85em">' + esc(p.location) + '</span><br>' : '') +
+          (p.continent  ? '<em style="font-size:0.8em;color:#888">' + esc(p.continent) + '</em><br>' : '') +
+          (p.description ? '<span style="font-size:0.85em">' + esc(p.description) + '</span>' : '');
         L.marker([p.lat, p.lng], { icon: icon })
-          .bindPopup(
-            '<b>' + esc(p.name) + '</b><br>' +
-            (p.location   ? esc(p.location)   + '<br>' : '') +
-            (p.continent  ? '<i>' + esc(p.continent) + '</i><br>' : '') +
-            (p.description ? esc(p.description) : '')
-          )
+          .bindPopup(popupHtml, { maxWidth: 200 })
           .addTo(map);
       });
     });
@@ -178,29 +181,48 @@ function esc(s) {
 }
 
 function deathHeadSVG() {
-  return '<svg class="death-head" width="48" height="40" viewBox="0 0 48 40" xmlns="http://www.w3.org/2000/svg">' +
-    // left wing
-    '<path d="M0,20 Q4,8 12,14 Q6,18 8,24 Q4,26 0,20Z" fill="#8899aa" opacity="0.8"/>' +
-    '<path d="M0,20 Q2,12 8,16" stroke="#aab" stroke-width="0.8" fill="none"/>' +
-    '<path d="M1,22 Q3,16 9,19" stroke="#aab" stroke-width="0.8" fill="none"/>' +
-    '<path d="M2,24 Q4,20 10,22" stroke="#aab" stroke-width="0.8" fill="none"/>' +
-    // right wing
-    '<path d="M48,20 Q44,8 36,14 Q42,18 40,24 Q44,26 48,20Z" fill="#8899aa" opacity="0.8"/>' +
-    '<path d="M48,20 Q46,12 40,16" stroke="#aab" stroke-width="0.8" fill="none"/>' +
-    '<path d="M47,22 Q45,16 39,19" stroke="#aab" stroke-width="0.8" fill="none"/>' +
-    '<path d="M46,24 Q44,20 38,22" stroke="#aab" stroke-width="0.8" fill="none"/>' +
-    // skull
-    '<ellipse cx="24" cy="18" rx="10" ry="11" fill="#c8c8d8" stroke="#666" stroke-width="0.8"/>' +
-    // eye sockets
-    '<ellipse cx="20" cy="17" rx="3" ry="3.5" fill="#1a1a2a"/>' +
-    '<ellipse cx="28" cy="17" rx="3" ry="3.5" fill="#1a1a2a"/>' +
-    // nose
-    '<path d="M23,22 L24,24 L25,22Z" fill="#1a1a2a"/>' +
+  // Viewbox 0 0 60 50 — scales via CSS width/height on .death-head
+  return '<svg class="death-head" width="48" height="40" viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">' +
+    // left wing — multi-feather
+    '<path d="M0,24 Q3,6 14,14 Q7,20 9,28 Q4,30 0,24Z" fill="#7a8c9e" opacity="0.9"/>' +
+    '<path d="M0,24 Q2,10 10,16" stroke="#9ab" stroke-width="1" fill="none" opacity="0.7"/>' +
+    '<path d="M1,26 Q3,14 11,20" stroke="#9ab" stroke-width="1" fill="none" opacity="0.7"/>' +
+    '<path d="M2,28 Q5,18 12,23" stroke="#9ab" stroke-width="1" fill="none" opacity="0.7"/>' +
+    '<path d="M1,18 Q5,8 13,11 Q8,16 10,20" fill="#6a7c8e" opacity="0.6"/>' +
+    '<path d="M2,14 Q7,4 14,9 Q9,14 11,17" fill="#5a6c7e" opacity="0.5"/>' +
+    // right wing — mirror
+    '<path d="M60,24 Q57,6 46,14 Q53,20 51,28 Q56,30 60,24Z" fill="#7a8c9e" opacity="0.9"/>' +
+    '<path d="M60,24 Q58,10 50,16" stroke="#9ab" stroke-width="1" fill="none" opacity="0.7"/>' +
+    '<path d="M59,26 Q57,14 49,20" stroke="#9ab" stroke-width="1" fill="none" opacity="0.7"/>' +
+    '<path d="M58,28 Q55,18 48,23" stroke="#9ab" stroke-width="1" fill="none" opacity="0.7"/>' +
+    '<path d="M59,18 Q55,8 47,11 Q52,16 50,20" fill="#6a7c8e" opacity="0.6"/>' +
+    '<path d="M58,14 Q53,4 46,9 Q51,14 49,17" fill="#5a6c7e" opacity="0.5"/>' +
+    // skull cranium — slightly weathered
+    '<ellipse cx="30" cy="22" rx="13" ry="14" fill="#c4c4d4" stroke="#5a5a6a" stroke-width="1"/>' +
+    '<ellipse cx="30" cy="22" rx="11" ry="12" fill="none" stroke="#9999aa" stroke-width="0.5" opacity="0.4"/>' +
+    // cranial suture lines
+    '<path d="M30,8 Q29,14 30,18" stroke="#aaa" stroke-width="0.5" fill="none" opacity="0.5"/>' +
+    '<path d="M22,12 Q26,16 30,18" stroke="#aaa" stroke-width="0.5" fill="none" opacity="0.4"/>' +
+    '<path d="M38,12 Q34,16 30,18" stroke="#aaa" stroke-width="0.5" fill="none" opacity="0.4"/>' +
+    // eye sockets — deep set
+    '<ellipse cx="24" cy="21" rx="4" ry="4.5" fill="#0d0d1a"/>' +
+    '<ellipse cx="36" cy="21" rx="4" ry="4.5" fill="#0d0d1a"/>' +
+    '<ellipse cx="23" cy="20" rx="1.5" ry="1" fill="#222230" opacity="0.5"/>' +
+    '<ellipse cx="35" cy="20" rx="1.5" ry="1" fill="#222230" opacity="0.5"/>' +
+    // nose cavity
+    '<path d="M28,27 Q30,30 32,27 Q30,25 28,27Z" fill="#0d0d1a"/>' +
+    // cheekbones
+    '<path d="M18,25 Q20,28 23,27" stroke="#aaa" stroke-width="0.6" fill="none" opacity="0.4"/>' +
+    '<path d="M42,25 Q40,28 37,27" stroke="#aaa" stroke-width="0.6" fill="none" opacity="0.4"/>' +
     // jaw
-    '<rect x="16" y="26" width="16" height="7" rx="2" fill="#b0b0c0" stroke="#666" stroke-width="0.6"/>' +
-    '<line x1="20" y1="26" x2="20" y2="33" stroke="#666" stroke-width="0.6"/>' +
-    '<line x1="24" y1="26" x2="24" y2="33" stroke="#666" stroke-width="0.6"/>' +
-    '<line x1="28" y1="26" x2="28" y2="33" stroke="#666" stroke-width="0.6"/>' +
+    '<rect x="19" y="33" width="22" height="9" rx="3" fill="#b4b4c4" stroke="#5a5a6a" stroke-width="0.8"/>' +
+    '<line x1="22" y1="33" x2="22" y2="42" stroke="#888" stroke-width="0.8"/>' +
+    '<line x1="26" y1="33" x2="26" y2="42" stroke="#888" stroke-width="0.8"/>' +
+    '<line x1="30" y1="33" x2="30" y2="42" stroke="#888" stroke-width="0.8"/>' +
+    '<line x1="34" y1="33" x2="34" y2="42" stroke="#888" stroke-width="0.8"/>' +
+    '<line x1="38" y1="33" x2="38" y2="42" stroke="#888" stroke-width="0.8"/>' +
+    // jawline connection
+    '<path d="M19,33 Q19,30 23,29 Q30,28 37,29 Q41,30 41,33" fill="#b4b4c4" stroke="#5a5a6a" stroke-width="0.8"/>' +
   '</svg>';
 }
 

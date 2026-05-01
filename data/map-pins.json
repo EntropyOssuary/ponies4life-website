@@ -5,7 +5,8 @@
     "lat": 40.685,
     "lng": -73.584,
     "continent": "North America",
-    "description": "A very distinguished pony."
+    "description": "A very distinguished pony.",
+    "photo": "photos/CE748BE6-8330-4BC9-8567-3E4BB9A77EEE_1_201_a.jpeg"
   },
   {
     "name": "Snorri",
@@ -13,7 +14,7 @@
     "lat": 65.68,
     "lng": -18.1,
     "continent": "Iceland",
-    "description": "A magnificent Icelandic horse who does the tölt with great dignity."
+    "description": "A magnificent Icelandic horse who does the t\u00f6lt with great dignity."
   },
   {
     "name": "Buttercup",
@@ -25,7 +26,7 @@
   },
   {
     "name": "Pepita",
-    "location": "Córdoba, Argentina",
+    "location": "C\u00f3rdoba, Argentina",
     "lat": -31.4,
     "lng": -64.18,
     "continent": "South America",

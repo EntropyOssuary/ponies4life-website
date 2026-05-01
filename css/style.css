@@ -16,7 +16,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "ChalkboardSE-Regular", "Marker Felt Wide", Arial, sans-serif;
   background-color: #000080;
   background-image: repeating-linear-gradient(
     45deg,
@@ -181,7 +181,7 @@ nav.geocities-nav a:hover {
   background: linear-gradient(135deg, #ff00ff, #8800ff);
   border: 2px outset #fff;
   color: #fff;
-  font-family: "Comic Sans MS", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "ChalkboardSE-Regular", "Marker Felt Wide", Arial, sans-serif;
   font-size: 0.9em;
   padding: 8px 16px;
   cursor: pointer;
@@ -237,57 +237,119 @@ nav.geocities-nav a:hover {
 .gravestone-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   padding: 20px;
+  align-items: end;
 }
 @media (max-width: 700px) {
-  .gravestone-grid { grid-template-columns: repeat(2, 1fr); }
+  .gravestone-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
 }
+
+/* shared stone base */
 .gravestone {
   display: inline-block;
   width: 100%;
-  background: linear-gradient(180deg, #4a4a5a, #2a2a35);
-  border-radius: 45% 45% 0 0 / 30% 30% 0 0;
-  padding: 20px 14px 14px;
+  padding: 22px 14px 16px;
   color: #c8c8d8;
   font-family: "Georgia", serif;
   position: relative;
-  box-shadow:
-    inset 2px 2px 8px rgba(255,255,255,0.1),
-    inset -2px -2px 8px rgba(0,0,0,0.5),
-    4px 8px 16px rgba(0,0,0,0.8);
-  border: 1px solid #666;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
 }
 .gravestone::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.1'/%3E%3C/svg%3E");
   border-radius: inherit;
   pointer-events: none;
+  z-index: 1;
 }
+.gravestone > * { position: relative; z-index: 2; }
+
+/* Style A — classic rounded colonial */
+.stone-rounded {
+  background: linear-gradient(160deg, #52525e 0%, #3a3a48 40%, #28282f 100%);
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+  border: 1px solid #6a6a7a;
+  box-shadow:
+    inset 3px 3px 10px rgba(255,255,255,0.08),
+    inset -3px -3px 10px rgba(0,0,0,0.6),
+    5px 12px 24px rgba(0,0,0,0.9),
+    0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Style B — gothic pointed arch */
+.stone-gothic {
+  background: linear-gradient(160deg, #3e3e50 0%, #2c2c3c 50%, #1e1e28 100%);
+  clip-path: polygon(20% 0%, 50% 0%, 80% 0%, 100% 15%, 100% 100%, 0% 100%, 0% 15%);
+  border: 1px solid #5a5a6e;
+  box-shadow:
+    inset 2px 2px 8px rgba(255,255,255,0.07),
+    6px 14px 28px rgba(0,0,0,0.95),
+    0 0 50px rgba(0,0,0,0.5);
+  padding-top: 30px;
+}
+.stone-gothic::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 30px;
+  background: linear-gradient(160deg, #3e3e50, #2c2c3c);
+  clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+
+/* Style C — tablet / stele with carved border */
+.stone-tablet {
+  background: linear-gradient(160deg, #484850 0%, #303038 50%, #222228 100%);
+  border-radius: 6px 6px 2px 2px;
+  border: 2px solid #5a5a68;
+  border-top-width: 4px;
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,0.04),
+    inset 0 0 0 8px rgba(0,0,0,0.15),
+    6px 14px 28px rgba(0,0,0,0.95);
+  padding: 24px 18px 16px;
+}
+.stone-tablet::before {
+  content: '✦ ✦ ✦';
+  display: block;
+  position: absolute;
+  top: 6px; left: 0; right: 0;
+  font-size: 0.55em;
+  color: #6a6a7a;
+  letter-spacing: 4px;
+  z-index: 2;
+}
+
+/* death's head — mobile size */
 .gravestone .death-head { margin: 0 auto 8px; display: block; }
+
+/* death's head — larger on desktop */
+@media (min-width: 701px) {
+  .gravestone .death-head { width: 72px; height: 60px; }
+}
+
 .gravestone .stone-name {
   font-size: 1em;
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   margin: 6px 0 4px;
   text-transform: uppercase;
+  color: #ddd;
 }
 .gravestone .stone-dates {
-  font-size: 0.75em;
+  font-size: 0.72em;
   letter-spacing: 2px;
   margin: 4px 0;
-  color: #aaa;
+  color: #999;
 }
 .gravestone .stone-epitaph {
-  font-size: 0.7em;
+  font-size: 0.68em;
   font-style: italic;
   margin-top: 8px;
-  line-height: 1.4;
-  color: #b0b0c0;
-  border-top: 1px solid #555;
+  line-height: 1.5;
+  color: #a8a8b8;
+  border-top: 1px solid #444;
   padding-top: 6px;
 }
 
@@ -471,7 +533,7 @@ hr.rainbow-hr {
   width: 100%;
   border-collapse: collapse;
   margin: 16px 0;
-  font-family: "Comic Sans MS", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "ChalkboardSE-Regular", "Marker Felt Wide", Arial, sans-serif;
 }
 .archive-table th {
   background: #000080;
@@ -488,7 +550,7 @@ hr.rainbow-hr {
 
 /* world map */
 #map { height: 450px; border: 3px solid var(--neon-cyan); margin: 12px 0; }
-.leaflet-container { font-family: "Comic Sans MS", cursive !important; }
+.leaflet-container { font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "ChalkboardSE-Regular", "Marker Felt Wide", Arial, sans-serif !important; }
 
 /* cemetery ground */
 .cemetery-ground {

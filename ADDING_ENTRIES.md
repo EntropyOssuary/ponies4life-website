@@ -6,7 +6,7 @@ Claude updates the JSON. Push to GitHub. Netlify redeploys.
 
 Format:
 ```json
-{ "name": "Horse Name", "dates": "1990 – 2010", "epitaph": "150 char max epitaph here." }
+{ "name": "Horse Name", "dates": "1990 – 2010", "epitaph": "100 char max." }
 ```
 
 ## Map Pin (Ponies Around the World) — data/map-pins.json
