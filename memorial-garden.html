@@ -35,22 +35,12 @@
   .bat-svg:nth-child(2) { top: 60px; right: 20%; animation: bat2 12s ease-in-out infinite; }
   .bat-svg:nth-child(3) { top: 120px; left: 50%; animation: bat3 7s ease-in-out infinite; }
 
-  /* Fog — denser, three layers */
-  @keyframes fog1 { 0%{transform:translateX(-15%);opacity:0} 15%{opacity:0.65} 85%{opacity:0.65} 100%{transform:translateX(15%);opacity:0} }
-  @keyframes fog2 { 0%{transform:translateX(15%);opacity:0} 20%{opacity:0.5} 80%{opacity:0.5} 100%{transform:translateX(-15%);opacity:0} }
-  @keyframes fog3 { 0%{transform:translateX(-8%);opacity:0} 25%{opacity:0.4} 75%{opacity:0.4} 100%{transform:translateX(8%);opacity:0} }
-  .fog { position: fixed; bottom: 0; left:-20%; width:140%; pointer-events:none; z-index:2; border-radius:60% 60% 0 0 / 40% 40% 0 0; }
-  .fog-1 { height:130px; background:linear-gradient(180deg,transparent,rgba(120,180,150,0.18) 50%,rgba(120,180,150,0.35)); animation:fog1 22s ease-in-out infinite; }
-  .fog-2 { height:90px; background:linear-gradient(180deg,transparent,rgba(100,160,130,0.12) 50%,rgba(100,160,130,0.25)); animation:fog2 30s ease-in-out infinite; }
-  .fog-3 { height:160px; background:linear-gradient(180deg,transparent,rgba(140,200,160,0.08) 60%,rgba(140,200,160,0.18)); animation:fog3 38s ease-in-out infinite; }
-
-  /* Lightning flash */
-  @keyframes lightning {
-    0%,89%,91%,93%,100% { background:transparent; }
-    90% { background:rgba(200,220,255,0.04); }
-    92% { background:rgba(200,220,255,0.07); }
-  }
-  body.memorial { animation: lightning 14s ease-in-out infinite; }
+  /* Fog */
+  @keyframes fog1 { 0%{transform:translateX(-15%);opacity:0} 20%{opacity:0.5} 80%{opacity:0.5} 100%{transform:translateX(15%);opacity:0} }
+  @keyframes fog2 { 0%{transform:translateX(15%);opacity:0} 20%{opacity:0.4} 80%{opacity:0.4} 100%{transform:translateX(-15%);opacity:0} }
+  .fog { position: fixed; bottom: 0; left:-20%; width:140%; height:100px; pointer-events:none; z-index:2; border-radius:50% 50% 0 0; }
+  .fog-1 { background:linear-gradient(180deg,transparent,rgba(140,200,170,0.12) 50%,rgba(140,200,170,0.22)); animation:fog1 20s ease-in-out infinite; }
+  .fog-2 { background:linear-gradient(180deg,transparent,rgba(140,200,170,0.08) 50%,rgba(140,200,170,0.15)); animation:fog2 28s ease-in-out infinite; height:70px; }
 
   /* Gate top */
   .garden-gate-top { margin: 0 auto 0; display: block; }
@@ -161,7 +151,6 @@
 <!-- Fog -->
 <div class="fog fog-1"></div>
 <div class="fog fog-2"></div>
-<div class="fog fog-3"></div>
 
 <!-- Autoplay popup -->
 <div id="autoplay-overlay" class="win95-overlay">

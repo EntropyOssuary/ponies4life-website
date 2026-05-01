@@ -82,7 +82,6 @@ function enterMemorialGarden() {
 })();
 
 // ---- LOAD JSON & RENDER GRAVESTONES ----
-var stoneStyles = ['stone-rounded', 'stone-gothic', 'stone-tablet'];
 function loadGravestones() {
   var grid = document.getElementById('grave-grid');
   if (!grid) return;
@@ -91,11 +90,10 @@ function loadGravestones() {
     .then(function (stones) {
       var countEl = document.getElementById('grave-count');
       if (countEl) countEl.textContent = stones.length;
-      grid.innerHTML = stones.map(function (s, i) {
-        var tilt = (Math.random() * 8 - 4).toFixed(1);
-        var style = stoneStyles[i % stoneStyles.length];
+      grid.innerHTML = stones.map(function (s) {
+        var tilt = (Math.random() * 6 - 3).toFixed(1);
         return [
-          '<div class="gravestone ' + style + '" style="transform:rotate(' + tilt + 'deg)">',
+          '<div class="gravestone" style="transform:rotate(' + tilt + 'deg)">',
             deathHeadSVG(),
             '<div class="stone-name">' + esc(s.name) + '</div>',
             s.dates ? '<div class="stone-dates">' + esc(s.dates) + '</div>' : '',
