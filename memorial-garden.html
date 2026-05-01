@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heart Horse Memorial Garden — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body.memorial {
+    background: #060008;
+    background-image:
+      radial-gradient(ellipse at 75% 5%, rgba(60,0,80,0.7) 0%, transparent 50%),
+      radial-gradient(ellipse at 25% 95%, rgba(0,30,15,0.5) 0%, transparent 45%);
+    min-height: 100vh;
+  }
+  /* Moon */
+  .moon {
+    position: fixed;
+    top: 28px; right: 28px;
+    width: 90px; height: 90px;
+    background: radial-gradient(circle at 35% 35%, #fffff8, #fffde0 40%, #e0e0c0);
+    border-radius: 50%;
+    box-shadow:
+      0 0 20px 8px rgba(255,255,200,0.15),
+      0 0 60px 20px rgba(255,255,180,0.08);
+    z-index: 0;
+    pointer-events: none;
+  }
+  /* Bats */
+  @keyframes bat1 { 0%{transform:translate(0,0) scaleX(1)} 30%{transform:translate(80px,-40px) scaleX(-1)} 60%{transform:translate(150px,-10px) scaleX(1)} 100%{transform:translate(0,0) scaleX(1)} }
+  @keyframes bat2 { 0%{transform:translate(0,0) scaleX(-1)} 40%{transform:translate(-60px,-50px) scaleX(1)} 80%{transform:translate(-130px,-20px) scaleX(-1)} 100%{transform:translate(0,0) scaleX(-1)} }
+  @keyframes bat3 { 0%{transform:translate(0,0)} 50%{transform:translate(50px,-70px)} 100%{transform:translate(0,0)} }
+  .bat-svg { position: fixed; pointer-events: none; z-index: 6; opacity: 0.65; }
+  .bat-svg:nth-child(1) { top: 80px; left: 15%; animation: bat1 9s ease-in-out infinite; }
+  .bat-svg:nth-child(2) { top: 60px; right: 20%; animation: bat2 12s ease-in-out infinite; }
+  .bat-svg:nth-child(3) { top: 120px; left: 50%; animation: bat3 7s ease-in-out infinite; }
+
+  /* Fog */
+  @keyframes fog1 { 0%{transform:translateX(-15%);opacity:0} 20%{opacity:0.5} 80%{opacity:0.5} 100%{transform:translateX(15%);opacity:0} }
+  @keyframes fog2 { 0%{transform:translateX(15%);opacity:0} 20%{opacity:0.4} 80%{opacity:0.4} 100%{transform:translateX(-15%);opacity:0} }
+  .fog { position: fixed; bottom: 0; left:-20%; width:140%; height:100px; pointer-events:none; z-index:2; border-radius:50% 50% 0 0; }
+  .fog-1 { background:linear-gradient(180deg,transparent,rgba(140,200,170,0.12) 50%,rgba(140,200,170,0.22)); animation:fog1 20s ease-in-out infinite; }
+  .fog-2 { background:linear-gradient(180deg,transparent,rgba(140,200,170,0.08) 50%,rgba(140,200,170,0.15)); animation:fog2 28s ease-in-out infinite; height:70px; }
+
+  /* Gate top */
+  .garden-gate-top { margin: 0 auto 0; display: block; }
+
+  /* Header */
+  .garden-header {
+    font-family: "Georgia", "Times New Roman", serif;
+    color: #c0b0d0;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    font-size: 0.92em;
+    line-height: 1.8;
+    font-style: italic;
+    border: 1px solid #333;
+    padding: 16px 20px;
+    background: rgba(0,0,0,0.5);
+    position: relative; z-index: 3;
+  }
+  .garden-title {
+    font-family: "Georgia", serif;
+    font-size: 1.8em;
+    color: #d0c0e0;
+    font-variant: small-caps;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px rgba(200,150,255,0.3);
+    margin: 16px 0 8px;
+    position: relative; z-index: 3;
+  }
+  .grave-count {
+    font-family: "Georgia", serif;
+    font-size: 0.9em;
+    color: #888;
+    border: 1px solid #333;
+    display: inline-block;
+    padding: 5px 18px;
+    margin: 8px;
+    background: rgba(0,0,0,0.6);
+    letter-spacing: 1px;
+    position: relative; z-index: 3;
+  }
+  .gravestone-grid {
+    position: relative; z-index: 3;
+  }
+  /* Submit section */
+  .memorial-submit {
+    position: relative; z-index: 3;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid #444;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 520px;
+    font-family: "Georgia", serif;
+  }
+  .memorial-submit h3 { color: #b0a0c0; font-variant: small-caps; letter-spacing: 2px; margin: 0 0 10px; }
+  .memorial-submit p { color: #888; font-size: 0.85em; line-height: 1.7; margin: 0 0 10px; }
+  .memorial-submit .email-btn {
+    background: #1a0a20;
+    border-color: #555;
+    color: #b0a0c0;
+    font-family: "Georgia", serif;
+  }
+
+  /* Back link */
+  .back-link {
+    position: relative; z-index: 3;
+    display: inline-block;
+    color: #666;
+    font-family: "Georgia", serif;
+    font-size: 0.8em;
+    margin: 8px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-bottom: 1px solid #333;
+  }
+  .back-link:hover { color: #aaa; }
+
+  /* Ground strip */
+  .ground-strip {
+    position: relative; z-index: 3;
+    height: 30px;
+    background: linear-gradient(180deg, transparent, #0a0a05);
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body class="memorial">
+
+<!-- Moon -->
+<div class="moon"></div>
+
+<!-- Bats -->
+<svg class="bat-svg" width="28" height="16" viewBox="0 0 28 16" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14,8 Q8,2 2,4 Q6,8 4,12 Q8,10 10,12 Q12,9 14,8Z" fill="#1a0020"/>
+  <path d="M14,8 Q20,2 26,4 Q22,8 24,12 Q20,10 18,12 Q16,9 14,8Z" fill="#1a0020"/>
+  <circle cx="14" cy="8" r="2.5" fill="#1a0020"/>
+</svg>
+<svg class="bat-svg" width="22" height="13" viewBox="0 0 22 13" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11,6 Q6,1 1,3 Q4,6 3,10 Q6,8 8,10 Q9,7 11,6Z" fill="#15001a"/>
+  <path d="M11,6 Q16,1 21,3 Q18,6 19,10 Q16,8 14,10 Q13,7 11,6Z" fill="#15001a"/>
+  <circle cx="11" cy="6" r="2" fill="#15001a"/>
+</svg>
+<svg class="bat-svg" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
+  <path d="M9,5 Q5,1 1,2 Q3,5 2,8 Q5,7 6,8 Q7,6 9,5Z" fill="#200028"/>
+  <path d="M9,5 Q13,1 17,2 Q15,5 16,8 Q13,7 12,8 Q11,6 9,5Z" fill="#200028"/>
+  <circle cx="9" cy="5" r="1.8" fill="#200028"/>
+</svg>
+
+<!-- Fog -->
+<div class="fog fog-1"></div>
+<div class="fog fog-2"></div>
+
+<!-- Autoplay popup -->
+<div id="autoplay-overlay" class="win95-overlay">
+  <div class="win95-popup">
+    <div class="win95-titlebar">
+      <span>ponies4.life</span>
+      <button class="win95-close" disabled>✕</button>
+    </div>
+    <div class="win95-body">
+      <p>For the full experience, enable autoplay.</p>
+      <button id="popup-ok" class="win95-ok">OK</button>
+    </div>
+  </div>
+</div>
+<iframe id="yt-player" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"
+  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<div class="page-wrap" style="max-width:1100px;background:transparent;border:none;">
+
+  <!-- Gate top graphic (small) -->
+  <svg class="garden-gate-top" width="260" height="90" viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg" style="opacity:0.7;position:relative;z-index:3;">
+    <defs>
+      <linearGradient id="ig2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#777"/>
+        <stop offset="100%" style="stop-color:#222"/>
+      </linearGradient>
+    </defs>
+    <rect x="5" y="10" width="8" height="80" fill="url(#ig2)"/>
+    <rect x="247" y="10" width="8" height="80" fill="url(#ig2)"/>
+    <path d="M13,35 Q130,5 247,35" stroke="url(#ig2)" stroke-width="6" fill="none"/>
+    <g fill="url(#ig2)" stroke="#444" stroke-width="0.3">
+      <rect x="18" y="35" width="5" height="55"/>
+      <rect x="32" y="35" width="5" height="55"/>
+      <rect x="46" y="35" width="5" height="55"/>
+      <rect x="60" y="35" width="5" height="55"/>
+      <rect x="74" y="35" width="5" height="55"/>
+      <rect x="88" y="35" width="5" height="55"/>
+      <rect x="102" y="35" width="5" height="55"/>
+      <rect x="116" y="35" width="5" height="55"/>
+      <rect x="130" y="35" width="5" height="55"/>
+      <rect x="144" y="35" width="5" height="55"/>
+      <rect x="158" y="35" width="5" height="55"/>
+      <rect x="172" y="35" width="5" height="55"/>
+      <rect x="186" y="35" width="5" height="55"/>
+      <rect x="200" y="35" width="5" height="55"/>
+      <rect x="214" y="35" width="5" height="55"/>
+      <rect x="228" y="35" width="5" height="55"/>
+      <rect x="242" y="35" width="5" height="55"/>
+    </g>
+    <g fill="#888">
+      <polygon points="20.5,35 23,26 25.5,35"/>
+      <polygon points="34.5,35 37,26 39.5,35"/>
+      <polygon points="48.5,35 51,26 53.5,35"/>
+      <polygon points="62.5,35 65,26 67.5,35"/>
+      <polygon points="76.5,35 79,26 81.5,35"/>
+      <polygon points="90.5,35 93,26 95.5,35"/>
+      <polygon points="104.5,35 107,22 109.5,35"/>
+      <polygon points="118.5,35 121,20 123.5,35"/>
+      <polygon points="132.5,35 135,18 137.5,35"/>
+      <polygon points="146.5,35 149,20 151.5,35"/>
+      <polygon points="160.5,35 163,22 165.5,35"/>
+      <polygon points="174.5,35 177,26 179.5,35"/>
+      <polygon points="188.5,35 191,26 193.5,35"/>
+      <polygon points="202.5,35 205,26 207.5,35"/>
+      <polygon points="216.5,35 219,26 221.5,35"/>
+      <polygon points="230.5,35 233,26 235.5,35"/>
+      <polygon points="244.5,35 247,26 249.5,35"/>
+    </g>
+  </svg>
+
+  <div class="garden-title">The Heart Horse Memorial Garden</div>
+
+  <div class="garden-header">
+    "Welcome to The Heart Horse Memorial Garden, where the good ones rest easy and the others still haunt us.
+    This special place is dedicated to the horses and ponies who touched our hearts, broke our bones,
+    emptied our wallets, and now gallop free forever."
+  </div>
+
+  <div class="grave-count"><span id="grave-count">0</span> ponies at rest.</div>
+
+  <div class="gravestone-grid" id="grave-grid"></div>
+
+  <div class="ground-strip"></div>
+
+  <div class="memorial-submit">
+    <h3>Submit a Memorial</h3>
+    <p>
+      Free to submit. All species and interpretations of "pony" accepted with equal solemnity.
+      Include: name, dates (optional), epitaph (150 character maximum).<br>
+      Editorial discretion applies. Submissions by email only.
+    </p>
+    <button class="email-btn" onclick="revealEmail(this)">✉ Submit a Memorial</button>
+  </div>
+
+  <a href="cemetery-gate.html" class="back-link">← Return to the Gate</a>
+  <a href="index.html" class="back-link" style="margin-left:16px;">← Back to the World</a>
+
+</div>
+
+<script src="js/main.js"></script>
+<script>
+// Auto-fire autoplay if arriving from gate (user already clicked ENTER)
+if (sessionStorage.getItem('gardenAutoplay') === '1') {
+  sessionStorage.removeItem('gardenAutoplay');
+  // Start music without popup (interaction already happened on gate page)
+  var iframe = document.getElementById('yt-player');
+  if (iframe) {
+    iframe.src = 'https://www.youtube-nocookie.com/embed/zuuObGsB0No?autoplay=1&loop=1&playlist=zuuObGsB0No&controls=0&rel=0';
+    // Love Will Tear Us Apart — Joy Division (verify ID: zuuObGsB0No)
+  }
+  document.getElementById('autoplay-overlay').style.display = 'none';
+} else {
+  initAutoplay('zuuObGsB0No');
+}
+
+loadGravestones();
+</script>
+</body>
+</html>

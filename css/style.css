@@ -1,0 +1,508 @@
+/* ===== PONIES4.LIFE — GLOBAL STYLES ===== */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+:root {
+  --gold: #ffd700;
+  --gold-dark: #b8860b;
+  --gold-light: #fffacd;
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --neon-yellow: #ffff00;
+  --neon-lime: #00ff00;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  background-color: #000080;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #000090 0px, #000090 2px,
+    #000080 2px, #000080 20px
+  );
+  color: #ffffff;
+  text-align: center;
+}
+
+a { color: var(--neon-cyan); text-decoration: underline; }
+a:visited { color: #ff88ff; }
+a:hover { color: var(--neon-yellow); }
+
+h1 {
+  font-size: 2.2em;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000;
+  margin: 10px 0;
+}
+h2 { font-size: 1.6em; margin: 8px 0; }
+
+.page-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+  background: rgba(0,0,30,0.7);
+  border: 3px solid var(--neon-cyan);
+  min-height: 100vh;
+}
+
+/* ---- RAINBOW TEXT ---- */
+@keyframes rainbow {
+  0%   { color: #ff0000; }
+  14%  { color: #ff7700; }
+  28%  { color: #ffff00; }
+  42%  { color: #00ff00; }
+  57%  { color: #00ffff; }
+  71%  { color: #0000ff; }
+  85%  { color: #ff00ff; }
+  100% { color: #ff0000; }
+}
+.rainbow { animation: rainbow 3s linear infinite; display: inline-block; }
+
+/* ---- BLINK ---- */
+@keyframes blink { 50% { opacity: 0; } }
+.blink { animation: blink 1s step-start infinite; }
+
+/* ---- MARQUEE WRAPPER ---- */
+.marquee-wrap {
+  background: #000;
+  border: 2px solid var(--neon-pink);
+  padding: 4px 0;
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+/* ---- STAR DIVIDER ---- */
+.star-divider {
+  color: var(--neon-yellow);
+  font-size: 1.3em;
+  letter-spacing: 4px;
+  margin: 10px 0;
+}
+
+/* ---- NAV BAR ---- */
+nav.geocities-nav {
+  background: linear-gradient(90deg, #000080, #800080, #000080);
+  border: 2px solid var(--neon-yellow);
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+nav.geocities-nav a {
+  background: #000;
+  border: 2px outset #aaa;
+  color: var(--neon-yellow);
+  padding: 4px 10px;
+  font-weight: bold;
+  font-size: 0.85em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+nav.geocities-nav a:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* ---- VISITOR COUNTER ---- */
+.counter-wrap {
+  border: 3px inset #555;
+  background: #000;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 10px;
+  font-family: "Courier New", monospace;
+}
+.counter-label { color: #aaa; font-size: 0.75em; display: block; }
+#visitor-count { color: var(--neon-lime); font-size: 1.5em; letter-spacing: 3px; }
+
+/* ---- WIN95 POPUP ---- */
+.win95-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.win95-overlay.active { display: flex; }
+.win95-popup {
+  background: #c0c0c0;
+  border: 3px outset #fff;
+  width: 300px;
+  font-family: "Arial", sans-serif;
+  color: #000;
+}
+.win95-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.win95-close {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  color: #888;
+  width: 18px; height: 18px;
+  font-size: 10px;
+  cursor: not-allowed;
+  padding: 0;
+}
+.win95-body {
+  padding: 16px;
+  text-align: center;
+}
+.win95-body p {
+  margin: 0 0 14px;
+  font-size: 0.9em;
+}
+.win95-ok {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  padding: 4px 24px;
+  font-family: "Arial", sans-serif;
+  font-size: 0.85em;
+  cursor: pointer;
+  font-weight: bold;
+}
+.win95-ok:hover { background: #d0d0d0; }
+.win95-ok:active { border-style: inset; }
+
+/* ---- EMAIL BUTTON ---- */
+.email-btn {
+  background: linear-gradient(135deg, #ff00ff, #8800ff);
+  border: 2px outset #fff;
+  color: #fff;
+  font-family: "Comic Sans MS", cursive;
+  font-size: 0.9em;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin: 6px;
+  font-weight: bold;
+}
+.email-btn:hover { background: linear-gradient(135deg, #ff44ff, #aa00ff); }
+
+/* ---- GILDED FRAME ---- */
+.gilded-frame {
+  display: inline-block;
+  position: relative;
+  padding: 18px;
+  background: linear-gradient(135deg,
+    #b8860b 0%, #ffd700 15%, #fffacd 30%,
+    #daa520 45%, #ffd700 55%, #b8860b 70%,
+    #ffd700 85%, #fffacd 100%
+  );
+  border: 4px solid #8b6914;
+  box-shadow:
+    0 0 0 2px #fffacd,
+    0 0 0 4px #daa520,
+    8px 8px 20px rgba(0,0,0,0.8),
+    inset 0 0 15px rgba(184,134,11,0.5);
+}
+.gilded-frame img {
+  display: block;
+  max-width: 380px;
+  width: 100%;
+  border: 3px solid #8b6914;
+}
+.gilded-frame::before,
+.gilded-frame::after {
+  content: '❋';
+  position: absolute;
+  color: #8b6914;
+  font-size: 1.5em;
+}
+.gilded-frame::before { top: 2px; left: 6px; }
+.gilded-frame::after { bottom: 2px; right: 6px; }
+
+/* ---- BLUE RIBBON ---- */
+.blue-ribbon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.blue-ribbon svg { width: 80px; height: 100px; }
+
+/* ---- GRAVESTONE ---- */
+.gravestone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+@media (max-width: 700px) {
+  .gravestone-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.gravestone {
+  display: inline-block;
+  width: 100%;
+  background: linear-gradient(180deg, #4a4a5a, #2a2a35);
+  border-radius: 45% 45% 0 0 / 30% 30% 0 0;
+  padding: 20px 14px 14px;
+  color: #c8c8d8;
+  font-family: "Georgia", serif;
+  position: relative;
+  box-shadow:
+    inset 2px 2px 8px rgba(255,255,255,0.1),
+    inset -2px -2px 8px rgba(0,0,0,0.5),
+    4px 8px 16px rgba(0,0,0,0.8);
+  border: 1px solid #666;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+.gravestone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  border-radius: inherit;
+  pointer-events: none;
+}
+.gravestone .death-head { margin: 0 auto 8px; display: block; }
+.gravestone .stone-name {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 6px 0 4px;
+  text-transform: uppercase;
+}
+.gravestone .stone-dates {
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  margin: 4px 0;
+  color: #aaa;
+}
+.gravestone .stone-epitaph {
+  font-size: 0.7em;
+  font-style: italic;
+  margin-top: 8px;
+  line-height: 1.4;
+  color: #b0b0c0;
+  border-top: 1px solid #555;
+  padding-top: 6px;
+}
+
+/* ---- FOG ---- */
+@keyframes fog-drift {
+  0%   { transform: translateX(-20%); opacity: 0; }
+  20%  { opacity: 0.7; }
+  80%  { opacity: 0.7; }
+  100% { transform: translateX(20%); opacity: 0; }
+}
+.fog-layer {
+  position: fixed;
+  bottom: 0; left: -20%;
+  width: 140%;
+  height: 120px;
+  background: linear-gradient(180deg, transparent, rgba(150,200,180,0.15) 60%, rgba(150,200,180,0.3));
+  animation: fog-drift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+.fog-layer:nth-child(2) { animation-delay: -9s; opacity: 0.5; }
+
+/* ---- BATS ---- */
+@keyframes bat-fly {
+  0%   { transform: translate(0,0) rotate(-10deg); }
+  25%  { transform: translate(60px,-30px) rotate(10deg); }
+  50%  { transform: translate(120px,10px) rotate(-5deg); }
+  75%  { transform: translate(60px,-15px) rotate(8deg); }
+  100% { transform: translate(0,0) rotate(-10deg); }
+}
+.bat {
+  position: fixed;
+  animation: bat-fly 6s ease-in-out infinite;
+  opacity: 0.7;
+  z-index: 5;
+  pointer-events: none;
+}
+.bat:nth-child(2) { animation-delay: -2s; animation-duration: 8s; }
+.bat:nth-child(3) { animation-delay: -4s; animation-duration: 7s; }
+
+/* ---- FULL MOON ---- */
+.moon {
+  position: fixed;
+  top: 40px; right: 40px;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle at 35% 35%, #fffff0, #ffd, #ccc);
+  border-radius: 50%;
+  box-shadow: 0 0 40px 15px rgba(255,255,200,0.3);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---- WROUGHT IRON GATE ---- */
+.gate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+/* ---- HUNT CLUB (Hall of Fame) ---- */
+body.hunt-club {
+  background-color: #1a0a00;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,100,20,0.1) 40px, rgba(139,100,20,0.1) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,100,20,0.1) 40px, rgba(139,100,20,0.1) 41px);
+  color: #f5e6c8;
+}
+body.hunt-club a { color: var(--gold); }
+body.hunt-club .page-wrap {
+  background: rgba(20,10,0,0.85);
+  border-color: var(--gold);
+}
+body.hunt-club nav.geocities-nav {
+  background: linear-gradient(90deg, #1a0800, #3d1f00, #1a0800);
+  border-color: var(--gold);
+}
+body.hunt-club nav.geocities-nav a { color: var(--gold); border-color: #8b6914; }
+
+.hof-entry {
+  display: inline-block;
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(135deg, #b8860b, #ffd700 20%, #fffacd 40%, #daa520 60%, #ffd700 80%, #b8860b);
+  border: 4px solid #8b6914;
+  box-shadow: 0 0 0 2px #fffacd, 0 0 0 4px #daa520, 8px 8px 20px rgba(0,0,0,0.9);
+  margin: 20px auto;
+  max-width: 500px;
+  width: 90%;
+}
+.hof-entry img { max-width: 100%; border: 2px solid #8b6914; display: block; }
+.hof-entry-inner {
+  background: #1a0800;
+  padding: 16px;
+  color: #f5e6c8;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+.hof-name {
+  font-size: 1.4em;
+  color: var(--gold);
+  font-variant: small-caps;
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--gold-dark);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+.hof-detail { font-size: 0.85em; margin: 4px 0; font-style: italic; }
+
+/* ---- MEMORIAL GARDEN body ---- */
+body.memorial {
+  background: #0a0010;
+  background-image:
+    radial-gradient(ellipse at 80% 10%, rgba(50,0,80,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 90%, rgba(0,30,20,0.5) 0%, transparent 50%);
+  color: #c0c0d0;
+}
+body.memorial .page-wrap {
+  background: transparent;
+  border: none;
+  max-width: 1100px;
+}
+
+/* ---- MISC ---- */
+.under-construction {
+  display: inline-block;
+  background: #000;
+  border: 2px dashed var(--neon-yellow);
+  padding: 4px 10px;
+  font-size: 0.75em;
+  color: var(--neon-yellow);
+  margin: 4px;
+}
+.page-title-bar {
+  background: linear-gradient(90deg, #ff00ff, #0000ff, #00ffff, #ff00ff);
+  background-size: 200% 100%;
+  animation: gradient-shift 4s linear infinite;
+  padding: 8px;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
+  letter-spacing: 2px;
+}
+@keyframes gradient-shift {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+hr.rainbow-hr {
+  border: 0;
+  height: 4px;
+  background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+  margin: 12px 0;
+}
+
+.sparkle-text {
+  font-size: 1.2em;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 8px var(--neon-yellow), 0 0 20px orange;
+}
+
+.photo-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px 0;
+}
+.photo-gallery img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border: 3px solid var(--gold);
+  cursor: pointer;
+}
+.photo-gallery img:hover { border-color: var(--neon-pink); transform: scale(1.05); }
+
+/* archive table */
+.archive-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-family: "Comic Sans MS", cursive;
+}
+.archive-table th {
+  background: #000080;
+  color: var(--neon-yellow);
+  padding: 8px;
+  border: 2px solid var(--neon-cyan);
+}
+.archive-table td {
+  padding: 6px 10px;
+  border: 1px solid #555;
+  color: #ddd;
+}
+.archive-table tr:nth-child(even) td { background: rgba(0,0,80,0.3); }
+
+/* world map */
+#map { height: 450px; border: 3px solid var(--neon-cyan); margin: 12px 0; }
+.leaflet-container { font-family: "Comic Sans MS", cursive !important; }
+
+/* cemetery ground */
+.cemetery-ground {
+  background: linear-gradient(180deg, transparent 80%, #1a1a0a 100%);
+  padding-bottom: 40px;
+  position: relative;
+}
+.grave-count {
+  font-family: "Georgia", serif;
+  font-size: 1.1em;
+  color: #aaa;
+  border: 1px solid #444;
+  display: inline-block;
+  padding: 6px 20px;
+  margin: 10px;
+  background: rgba(0,0,0,0.5);
+}

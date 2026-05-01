@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hall of Fame — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .hof-header-crest {
+    font-size: 3em;
+    margin: 10px 0 4px;
+    text-shadow: 0 0 20px var(--gold), 0 0 40px #b8860b;
+  }
+  .hof-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 2.2em;
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    text-shadow: 2px 2px 4px #000, 0 0 20px #b8860b;
+    margin: 8px 0;
+  }
+  .hof-motto {
+    font-family: "Georgia", serif;
+    color: #c8a96e;
+    font-style: italic;
+    font-size: 1em;
+    border: 1px solid #8b6914;
+    display: inline-block;
+    padding: 4px 20px;
+    margin: 8px 0;
+    letter-spacing: 2px;
+  }
+  .hof-rule { border-color: #8b6914; }
+  .submission-box {
+    background: rgba(20,10,0,0.7);
+    border: 2px solid var(--gold-dark);
+    padding: 16px;
+    margin: 16px auto;
+    max-width: 520px;
+    font-family: "Georgia", serif;
+  }
+  .submission-box h3 { color: var(--gold); font-variant: small-caps; margin: 0 0 10px; }
+  .fee-note {
+    background: #1a0800;
+    border: 1px solid var(--gold-dark);
+    padding: 10px 16px;
+    font-size: 0.85em;
+    color: #c8a96e;
+    margin: 10px 0;
+    font-style: italic;
+  }
+  .hof-empty {
+    color: #c8a96e;
+    font-family: "Georgia", serif;
+    font-style: italic;
+    padding: 40px;
+    font-size: 1.05em;
+  }
+  /* Fox hunt decorative border */
+  .hunt-border {
+    border: 2px solid var(--gold-dark);
+    background: repeating-linear-gradient(
+      90deg,
+      transparent, transparent 30px,
+      rgba(184,134,11,0.1) 30px, rgba(184,134,11,0.1) 31px
+    );
+    padding: 20px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .hunt-border::before {
+    content: '🦌  ✦  🐎  ✦  🏇  ✦  🐎  ✦  🦌';
+    display: block;
+    font-size: 0.9em;
+    color: var(--gold-dark);
+    letter-spacing: 6px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .hunt-border::after {
+    content: '✦  ✦  ✦';
+    display: block;
+    font-size: 0.9em;
+    color: var(--gold-dark);
+    letter-spacing: 6px;
+    margin-top: 12px;
+    text-align: center;
+  }
+</style>
+</head>
+<body class="hunt-club">
+
+<!-- Autoplay popup — no music specified for HOF in brief, skip -->
+
+<div class="page-wrap">
+  <nav class="geocities-nav">
+    <a href="index.html">🏠 HOME</a>
+    <a href="pony-of-the-month.html">🏆 PONY OF THE MONTH</a>
+    <a href="ponies-around-the-world.html">🌍 AROUND THE WORLD</a>
+    <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
+    <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
+  </nav>
+
+  <div class="hof-header-crest">🏇</div>
+  <div class="hof-title">The Ponies4.Life Hall of Fame</div>
+  <div class="hof-motto">Per Equum ad Astra</div>
+
+  <hr style="border-color:var(--gold-dark);margin:12px 0;">
+
+  <p style="font-family:Georgia,serif;color:#c8a96e;font-size:0.9em;max-width:560px;margin:0 auto 16px;line-height:1.7;">
+    Only the most distinguished ponies in the world are welcomed into these hallowed halls.
+    The criteria are <em>rigorous</em>. The committee is <em>discerning</em>.
+    The proceedings are <em>confidential</em>.
+    This is not a democracy. This is a <strong style="color:var(--gold)">Hall of Fame</strong>.
+  </p>
+
+  <div class="hunt-border">
+    <div id="hof-container">
+      <div class="hof-empty">The Hall awaits its first inductee.<br>
+      <span style="font-size:0.85em;color:#8b6914">Check back after the committee convenes.</span></div>
+    </div>
+  </div>
+
+  <hr style="border-color:var(--gold-dark);margin:12px 0;">
+
+  <div class="submission-box">
+    <h3>Nominations & Consideration</h3>
+    <p style="color:#c8a96e;font-size:0.85em;line-height:1.7;margin:0 0 10px;">
+      Nominations for the Hall of Fame are accepted by the committee on a rolling basis.
+      All species welcome. All interpretations of "pony" considered with equal gravity.
+    </p>
+    <div class="fee-note">
+      A consideration fee of <strong>$20 USD (Bitcoin via PayPal)</strong> is required with each nomination.
+      This fee is non-refundable and does not guarantee induction.<br>
+      <span style="font-size:0.9em;">The committee's decisions are final, binding, and beyond appeal.</span>
+    </div>
+    <p style="color:#888;font-size:0.8em;font-style:italic;margin:0 0 10px;">
+      Nominations by email only. Include name, notable achievements, and reason for consideration.
+    </p>
+    <button class="email-btn" style="background:linear-gradient(135deg,#b8860b,#ffd700);color:#1a0800;border-color:#8b6914;"
+      onclick="revealEmail(this)">✉ SUBMIT NOMINATION</button>
+  </div>
+
+  <p style="color:#555;font-size:0.75em;font-family:Georgia,serif;font-style:italic;margin:16px;">
+    Friends of the committee are admitted by invitation only, at no charge.<br>
+    This policy is not advertised. You already know if it applies to you.
+  </p>
+
+  <div class="counter-wrap" style="border-color:#8b6914;">
+    <span class="counter-label" style="color:#8b6914;">DISTINGUISHED VISITORS</span>
+    <span id="visitor-count" style="color:var(--gold);">0000000</span>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>loadHallOfFame();</script>
+</body>
+</html>

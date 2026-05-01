@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponies Around the World — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  body { background: radial-gradient(ellipse at center, #000044 0%, #000000 100%); }
+  #map { height: 460px; border: 4px solid var(--neon-cyan); margin: 12px 0; border-radius: 4px; }
+  .continent-legend {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin: 8px 0; font-size: 0.8em;
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #000; flex-shrink: 0; }
+  .goal-box {
+    background: rgba(0,0,80,0.6);
+    border: 3px solid var(--neon-yellow);
+    padding: 12px 20px;
+    display: inline-block;
+    margin: 10px;
+    font-size: 0.9em;
+  }
+  .continent-progress { margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .continent-chip {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: bold;
+    border: 1px solid transparent;
+  }
+  .chip-done   { background: #003300; color: #00ff88; border-color: #00ff88; }
+  .chip-needed { background: #330000; color: #ff6666; border-color: #ff4444; }
+</style>
+</head>
+<body>
+
+<!-- Autoplay popup -->
+<div id="autoplay-overlay" class="win95-overlay">
+  <div class="win95-popup">
+    <div class="win95-titlebar">
+      <span>ponies4.life</span>
+      <button class="win95-close" disabled>✕</button>
+    </div>
+    <div class="win95-body">
+      <p>For the full experience, enable autoplay.</p>
+      <button id="popup-ok" class="win95-ok">OK</button>
+    </div>
+  </div>
+</div>
+<iframe id="yt-player" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"
+  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<div class="page-wrap">
+  <div class="page-title-bar">🌍 PONIES AROUND THE WORLD 🌍</div>
+
+  <nav class="geocities-nav">
+    <a href="index.html">🏠 HOME</a>
+    <a href="pony-of-the-month.html">🏆 PONY OF THE MONTH</a>
+    <a href="ponies-around-the-world.html">🌍 AROUND THE WORLD</a>
+    <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
+    <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
+  </nav>
+
+  <hr class="rainbow-hr">
+
+  <marquee scrollamount="3" style="color:var(--neon-cyan);font-size:0.9em;background:#000;padding:3px;">
+    🐴 PONIES SPOTTED ON EVERY CONTINENT &nbsp; 🌐 ICELAND IS ITS OWN CONTINENT &nbsp; 🐾 RACCOONS ARE ALSO WELCOME &nbsp; 🗺 SUBMIT YOURS TODAY 🐴
+  </marquee>
+
+  <div class="goal-box">
+    <p style="color:var(--neon-yellow);font-weight:bold;margin:0 0 6px;">🎯 THE MISSION</p>
+    <p style="color:#ddd;margin:0 0 8px;font-size:0.9em;">Ponies from all continents. <span style="color:#00ffff">Iceland counts as its own.</span></p>
+    <div class="continent-progress" id="continent-progress"></div>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="continent-legend" id="continent-legend"></div>
+
+  <hr class="rainbow-hr">
+
+  <div style="background:rgba(0,0,60,0.5);border:2px solid var(--neon-pink);padding:14px;margin:12px auto;max-width:520px;">
+    <p style="color:#ffff00;font-weight:bold;margin:0 0 8px;">📬 SUBMIT YOUR PONY</p>
+    <p style="color:#ddd;font-size:0.85em;margin:0 0 10px;">
+      Free to submit. Email only. Include: name, location (city/country), a brief description (optional photo).<br>
+      <span style="color:#aaa">All species welcome. Loosely defined ponies accepted. Raccoons especially.</span><br>
+      <span style="color:#888;font-size:0.9em;">No guaranteed acceptance. Total editorial control.</span>
+    </p>
+    <button class="email-btn" onclick="revealEmail(this)">📧 SUBMIT A PONY</button>
+  </div>
+
+  <div class="counter-wrap">
+    <span class="counter-label">SITE VISITORS</span>
+    <span id="visitor-count">0000000</span>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+var continentColors = {
+  'Europe':       '#00ccff',
+  'North America':'#ffcc00',
+  'South America':'#ff6600',
+  'Asia':         '#ff00cc',
+  'Africa':       '#00ff88',
+  'Oceania':      '#cc88ff',
+  'Antarctica':   '#ffffff',
+  'Iceland':      '#00ffff'
+};
+var allContinents = ['Europe','North America','South America','Asia','Africa','Oceania','Antarctica','Iceland'];
+
+// Init map
+var map = L.map('map', {
+  center: [20, 0],
+  zoom: 2,
+  minZoom: 1
+});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 18
+}).addTo(map);
+
+// Legend
+var legend = document.getElementById('continent-legend');
+allContinents.forEach(function(c) {
+  var div = document.createElement('div');
+  div.className = 'legend-item';
+  div.innerHTML = '<div class="legend-dot" style="background:' + continentColors[c] + '"></div><span style="color:#ccc">' + c + '</span>';
+  legend.appendChild(div);
+});
+
+// Load pins & update progress
+fetch('data/map-pins.json')
+  .then(function(r) { return r.json(); })
+  .then(function(pins) {
+    var found = {};
+    pins.forEach(function(p) {
+      found[p.continent] = true;
+      var color = continentColors[p.continent] || '#ff00ff';
+      var icon = L.divIcon({
+        html: '<div style="width:14px;height:14px;border-radius:50%;background:' + color + ';border:2px solid #000;box-shadow:0 0 6px ' + color + '"></div>',
+        iconSize:[14,14], iconAnchor:[7,7], className:''
+      });
+      L.marker([p.lat, p.lng], {icon:icon})
+        .bindPopup('<b>' + esc(p.name) + '</b><br>' +
+          (p.location ? esc(p.location) + '<br>' : '') +
+          (p.continent ? '<i>' + esc(p.continent) + '</i><br>' : '') +
+          (p.description ? esc(p.description) : ''))
+        .addTo(map);
+    });
+    var prog = document.getElementById('continent-progress');
+    prog.innerHTML = allContinents.map(function(c) {
+      var has = !!found[c];
+      return '<span class="continent-chip ' + (has ? 'chip-done' : 'chip-needed') + '">' +
+        (has ? '✓ ' : '✗ ') + c + '</span>';
+    }).join('');
+  });
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+initAutoplay('V_bJf3foa5I'); // Bring on the Dancing Horses — Echo & the Bunnymen
+</script>
+</body>
+</html>

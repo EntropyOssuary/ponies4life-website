@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pony of the Month Archive — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page-wrap">
+  <div class="page-title-bar">📂 PONY OF THE MONTH ARCHIVE</div>
+
+  <nav class="geocities-nav">
+    <a href="index.html">🏠 HOME</a>
+    <a href="pony-of-the-month.html">🏆 PONY OF THE MONTH</a>
+    <a href="ponies-around-the-world.html">🌍 AROUND THE WORLD</a>
+    <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
+    <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
+  </nav>
+
+  <hr class="rainbow-hr">
+
+  <p style="color:#ffff00;font-size:1.1em;">A complete record of every Pony of the Month since May 2026.</p>
+  <p style="color:#aaa;font-size:0.85em;font-style:italic;">"Unbroken. Undefeated. Ungrazeable."</p>
+
+  <div class="star-divider">★ ★ ★</div>
+
+  <table class="archive-table" id="archive-table">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Winner</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody id="archive-body"></tbody>
+  </table>
+
+  <p style="color:#555;font-size:0.8em;font-style:italic;">Archive grows automatically each month. No human intervention required.</p>
+
+  <div class="counter-wrap">
+    <span class="counter-label">SITE VISITORS</span>
+    <span id="visitor-count">0000000</span>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+(function() {
+  var months = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+  var start = new Date(2026, 4, 1); // May 2026
+  var now = new Date();
+  var rows = [];
+  var d = new Date(start);
+  while (d <= now) {
+    rows.push({
+      month: months[d.getMonth()],
+      year: d.getFullYear(),
+      winner: 'Gryffin',
+      notes: d.getMonth() === 4 && d.getFullYear() === 2026
+        ? 'Inaugural Winner'
+        : 'Unanimous decision'
+    });
+    d.setMonth(d.getMonth() + 1);
+  }
+  var tbody = document.getElementById('archive-body');
+  tbody.innerHTML = rows.map(function(r) {
+    return '<tr><td>' + r.month + '</td><td>' + r.year + '</td>' +
+           '<td style="color:var(--neon-yellow);font-weight:bold">' + r.winner + '</td>' +
+           '<td style="color:#aaa;font-style:italic">' + r.notes + '</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

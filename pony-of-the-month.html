@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pony of the Month — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body { background: radial-gradient(ellipse at center, #000066 0%, #000033 100%); }
+  .potm-hero { position: relative; display: inline-block; margin: 20px auto; }
+  .month-banner {
+    background: linear-gradient(135deg, #000080, #800080);
+    border: 3px solid var(--neon-yellow);
+    display: inline-block;
+    padding: 8px 24px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--neon-yellow);
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--neon-yellow);
+    margin: 10px 0;
+  }
+  .ribbon-label {
+    position: absolute;
+    bottom: 30px;
+    left: -10px;
+    background: #0000cc;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 4px 10px;
+    border: 2px solid var(--neon-cyan);
+    letter-spacing: 1px;
+    transform: rotate(-3deg);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    white-space: nowrap;
+  }
+  .potm-name {
+    font-size: 2.2em;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 20px var(--neon-yellow), 3px 3px 0 #000;
+    margin: 10px 0;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .potm-tagline { color: #ff88ff; font-size: 1.05em; font-style: italic; margin: 6px 0; }
+  .gallery-section { background: rgba(0,0,50,0.5); border: 2px solid #555; padding: 12px; margin: 16px 0; }
+  .archive-link-box {
+    background: rgba(0,0,80,0.6);
+    border: 2px dashed var(--neon-cyan);
+    padding: 10px 20px;
+    display: inline-block;
+    margin: 12px;
+  }
+</style>
+</head>
+<body>
+<!-- Autoplay popup -->
+<div id="autoplay-overlay" class="win95-overlay">
+  <div class="win95-popup">
+    <div class="win95-titlebar">
+      <span>ponies4.life</span>
+      <button class="win95-close" disabled>✕</button>
+    </div>
+    <div class="win95-body">
+      <p>For the full experience, enable autoplay.</p>
+      <button id="popup-ok" class="win95-ok">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden YouTube player -->
+<iframe id="yt-player" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"
+  frameborder="0" allow="autoplay; encrypted-media"
+  allowfullscreen></iframe>
+
+<div class="page-wrap">
+  <div class="page-title-bar">🏆 PONY OF THE MONTH 🏆</div>
+
+  <nav class="geocities-nav">
+    <a href="index.html">🏠 HOME</a>
+    <a href="pony-of-the-month.html">🏆 PONY OF THE MONTH</a>
+    <a href="ponies-around-the-world.html">🌍 AROUND THE WORLD</a>
+    <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
+    <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
+  </nav>
+
+  <hr class="rainbow-hr">
+
+  <div class="month-banner">
+    <span id="current-month-year">Loading...</span>
+  </div>
+
+  <p class="blink sparkle-text">⭐ THE RESULTS ARE IN ⭐</p>
+
+  <p class="potm-name">GRYFFIN</p>
+  <p class="potm-tagline">Reigning Champion. Every Month. No Exceptions.</p>
+
+  <!-- Gilded frame with ribbon -->
+  <div class="potm-hero">
+    <!-- Blue ribbon SVG -->
+    <div class="blue-ribbon">
+      <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg">
+        <!-- ribbon circle top -->
+        <circle cx="40" cy="28" r="22" fill="#1a44cc" stroke="#0022aa" stroke-width="2"/>
+        <circle cx="40" cy="28" r="16" fill="none" stroke="#4477ff" stroke-width="1.5" opacity="0.6"/>
+        <text x="40" y="23" text-anchor="middle" font-size="7" font-family="Georgia,serif" fill="#ffd700" font-weight="bold">1ST</text>
+        <text x="40" y="34" text-anchor="middle" font-size="5.5" font-family="Georgia,serif" fill="#ffd700">PLACE</text>
+        <!-- ribbon tails -->
+        <path d="M28,48 L22,90 L40,78 L58,90 L52,48 Z" fill="#1a44cc" stroke="#0022aa" stroke-width="1.5"/>
+        <line x1="40" y1="50" x2="40" y2="78" stroke="#4477ff" stroke-width="1" opacity="0.5"/>
+        <path d="M22,90 L40,80 L40,90 L30,100Z" fill="#0d33aa"/>
+        <path d="M58,90 L40,80 L40,90 L50,100Z" fill="#0d33aa"/>
+      </svg>
+    </div>
+
+    <div class="gilded-frame">
+      <!-- Using first photo as the featured Gryffin photo -->
+      <img src="photos/11E3AF81-EDF8-440C-A29D-C3E943CB1F1E_1_105_c.jpeg" alt="Gryffin — Pony of the Month">
+    </div>
+    <div class="ribbon-label">★ PONY OF THE MONTH ★</div>
+  </div>
+
+  <hr class="rainbow-hr">
+
+  <div style="background:rgba(0,0,80,0.5);border:2px solid var(--neon-cyan);padding:14px;margin:12px auto;max-width:500px;">
+    <p style="color:#ffff88;font-size:1.05em;margin:0 0 8px;">
+      <b style="color:#ff00ff">Gryffin</b> has been awarded Pony of the Month for the
+      <span id="month-ordinal" style="color:#00ffff"></span> consecutive month.
+    </p>
+    <p style="color:#ccc;font-size:0.85em;font-style:italic;margin:0;">
+      The committee reviewed all submissions.<br>
+      The committee chose Gryffin.<br>
+      The committee will always choose Gryffin.
+    </p>
+  </div>
+
+  <div class="gallery-section">
+    <p style="color:var(--neon-yellow);font-weight:bold;margin-bottom:8px;">📸 GRYFFIN THROUGH THE AGES</p>
+    <div class="photo-gallery" id="photo-gallery"></div>
+  </div>
+
+  <hr class="rainbow-hr">
+
+  <div class="archive-link-box">
+    <p style="color:#ffff00;margin:0 0 6px;font-weight:bold;">📂 PONY OF THE MONTH ARCHIVE</p>
+    <p style="color:#ddd;font-size:0.85em;margin:0 0 8px;">All previous winners. (Spoiler: It's always Gryffin.)</p>
+    <a href="archive.html" style="color:var(--neon-cyan);font-weight:bold;">→ View Archive</a>
+  </div>
+
+  <div class="counter-wrap">
+    <span class="counter-label">SITE VISITORS</span>
+    <span id="visitor-count">0000000</span>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+setCurrentMonth();
+initAutoplay('mk48xRzuNvA'); // Hall of Fame — The Script
+
+// Month ordinal (months since May 2026)
+(function() {
+  var start = new Date(2026, 4, 1); // May 2026
+  var now = new Date();
+  var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth()) + 1;
+  if (months < 1) months = 1;
+  var ordinals = ['','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th',
+                  '11th','12th','13th','14th','15th','16th','17th','18th','19th','20th'];
+  var el = document.getElementById('month-ordinal');
+  if (el) el.textContent = (months <= 20 ? ordinals[months] : months + 'th');
+})();
+
+// Build photo gallery (all photos)
+(function() {
+  var photos = [
+    '11E3AF81-EDF8-440C-A29D-C3E943CB1F1E_1_105_c.jpeg',
+    '1301EDEF-43EA-4437-8BE3-494B19EFAE8D_1_105_c.jpeg',
+    '2594FA0A-F442-4B17-9F7C-E903BFDC25C7_1_105_c.jpeg',
+    '37925EBF-391E-4B28-9688-B33BC6BE9EC6_1_105_c.jpeg',
+    '3CEED8E7-9046-4F6E-A9FC-01BC6FA33272_1_105_c.jpeg',
+    '6EEA8AA5-BFA8-4E6F-A433-960B990EDA73_1_105_c.jpeg',
+    '797D6B5B-12CD-4082-9B41-1D7ACC890575_1_105_c.jpeg',
+    '7E0DA2E1-B66C-49B5-A76D-9E2E0E4BE6F6_1_201_a.jpeg',
+    '81F3AB19-F8E3-41F3-85D0-ED270EBFA8BC_1_105_c.jpeg',
+    '83CACB25-2A47-4257-BB07-ECDF267F6392_1_105_c.jpeg',
+    '898FADEF-4C7B-4315-AE29-70EB35858044_1_105_c.jpeg',
+    '96EEDB2B-92C6-46F8-BA4A-8BDFB564FFB5_1_105_c.jpeg',
+    '9A2C2C90-D29D-4DC2-99C8-00160E1257F6_1_105_c.jpeg',
+    '9B45FAB0-08C4-4A8D-A908-417F27930A8C_1_105_c.jpeg',
+    '9DBFC7D2-F5F9-45BC-98FF-D3DFF42E55B8_1_102_a.jpeg',
+    'A6CF7C28-EE5B-470B-A7C3-2B72D4167BD1_1_105_c.jpeg',
+    'ABDF8C51-0D6E-4CEA-9C58-732D68711658_1_102_a.jpeg',
+    'B2221E0E-0F9C-410E-AE6D-2017AC126D8A_1_102_a.jpeg',
+    'BFB2419E-21D1-406E-9785-F9D2AFAA4036_1_105_c.jpeg',
+    'C58FF5FB-9E68-422C-8666-05A7299D4E77_1_105_c.jpeg',
+    'CE748BE6-8330-4BC9-8567-3E4BB9A77EEE_1_201_a.jpeg',
+    'DA1B696D-B9C9-4F2E-9C0E-A1477664F767_1_201_a.jpeg',
+    'DCF5B46F-3DF8-4FDA-9569-9469972BC8FF_1_102_a.jpeg',
+    'F54038CF-35BD-48F5-9C80-5B7654F92D7C_1_105_c.jpeg'
+  ];
+  var gallery = document.getElementById('photo-gallery');
+  // skip first (used in frame) — show rest
+  gallery.innerHTML = photos.slice(1).map(function(p) {
+    return '<img src="photos/' + p + '" alt="Gryffin">';
+  }).join('');
+})();
+</script>
+</body>
+</html>
