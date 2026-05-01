@@ -92,7 +92,7 @@
   <p class="blink sparkle-text">⭐ THE RESULTS ARE IN ⭐</p>
 
   <p class="potm-name">GRYFFIN</p>
-  <p class="potm-tagline">Reigning Champion. Every Month. No Exceptions.</p>
+  <p class="potm-tagline">This Month's Champion.</p>
 
   <!-- Gilded frame with ribbon -->
   <div class="potm-hero">
@@ -122,27 +122,17 @@
   <hr class="rainbow-hr">
 
   <div style="background:rgba(0,0,80,0.5);border:2px solid var(--neon-cyan);padding:14px;margin:12px auto;max-width:500px;">
-    <p style="color:#ffff88;font-size:1.05em;margin:0 0 8px;">
-      <b style="color:#ff00ff">Gryffin</b> has been awarded Pony of the Month for the
-      <span id="month-ordinal" style="color:#00ffff"></span> consecutive month.
-    </p>
     <p style="color:#ccc;font-size:0.85em;font-style:italic;margin:0;">
       The committee reviewed all submissions.<br>
-      The committee chose Gryffin.<br>
-      The committee will always choose Gryffin.
+      The committee has made its decision.
     </p>
-  </div>
-
-  <div class="gallery-section">
-    <p style="color:var(--neon-yellow);font-weight:bold;margin-bottom:8px;">📸 GRYFFIN THROUGH THE AGES</p>
-    <div class="photo-gallery" id="photo-gallery"></div>
   </div>
 
   <hr class="rainbow-hr">
 
   <div class="archive-link-box">
     <p style="color:#ffff00;margin:0 0 6px;font-weight:bold;">📂 PONY OF THE MONTH ARCHIVE</p>
-    <p style="color:#ddd;font-size:0.85em;margin:0 0 8px;">All previous winners. (Spoiler: It's always Gryffin.)</p>
+    <p style="color:#ddd;font-size:0.85em;margin:0 0 8px;">All previous winners.</p>
     <a href="archive.html" style="color:var(--neon-cyan);font-weight:bold;">→ View Archive</a>
   </div>
 
@@ -156,53 +146,6 @@
 <script>
 setCurrentMonth();
 initAutoplay('mk48xRzuNvA'); // Hall of Fame — The Script
-
-// Month ordinal (months since May 2026)
-(function() {
-  var start = new Date(2026, 4, 1); // May 2026
-  var now = new Date();
-  var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth()) + 1;
-  if (months < 1) months = 1;
-  var ordinals = ['','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th',
-                  '11th','12th','13th','14th','15th','16th','17th','18th','19th','20th'];
-  var el = document.getElementById('month-ordinal');
-  if (el) el.textContent = (months <= 20 ? ordinals[months] : months + 'th');
-})();
-
-// Build photo gallery (all photos)
-(function() {
-  var photos = [
-    '11E3AF81-EDF8-440C-A29D-C3E943CB1F1E_1_105_c.jpeg',
-    '1301EDEF-43EA-4437-8BE3-494B19EFAE8D_1_105_c.jpeg',
-    '2594FA0A-F442-4B17-9F7C-E903BFDC25C7_1_105_c.jpeg',
-    '37925EBF-391E-4B28-9688-B33BC6BE9EC6_1_105_c.jpeg',
-    '3CEED8E7-9046-4F6E-A9FC-01BC6FA33272_1_105_c.jpeg',
-    '6EEA8AA5-BFA8-4E6F-A433-960B990EDA73_1_105_c.jpeg',
-    '797D6B5B-12CD-4082-9B41-1D7ACC890575_1_105_c.jpeg',
-    '7E0DA2E1-B66C-49B5-A76D-9E2E0E4BE6F6_1_201_a.jpeg',
-    '81F3AB19-F8E3-41F3-85D0-ED270EBFA8BC_1_105_c.jpeg',
-    '83CACB25-2A47-4257-BB07-ECDF267F6392_1_105_c.jpeg',
-    '898FADEF-4C7B-4315-AE29-70EB35858044_1_105_c.jpeg',
-    '96EEDB2B-92C6-46F8-BA4A-8BDFB564FFB5_1_105_c.jpeg',
-    '9A2C2C90-D29D-4DC2-99C8-00160E1257F6_1_105_c.jpeg',
-    '9B45FAB0-08C4-4A8D-A908-417F27930A8C_1_105_c.jpeg',
-    '9DBFC7D2-F5F9-45BC-98FF-D3DFF42E55B8_1_102_a.jpeg',
-    'A6CF7C28-EE5B-470B-A7C3-2B72D4167BD1_1_105_c.jpeg',
-    'ABDF8C51-0D6E-4CEA-9C58-732D68711658_1_102_a.jpeg',
-    'B2221E0E-0F9C-410E-AE6D-2017AC126D8A_1_102_a.jpeg',
-    'BFB2419E-21D1-406E-9785-F9D2AFAA4036_1_105_c.jpeg',
-    'C58FF5FB-9E68-422C-8666-05A7299D4E77_1_105_c.jpeg',
-    'CE748BE6-8330-4BC9-8567-3E4BB9A77EEE_1_201_a.jpeg',
-    'DA1B696D-B9C9-4F2E-9C0E-A1477664F767_1_201_a.jpeg',
-    'DCF5B46F-3DF8-4FDA-9569-9469972BC8FF_1_102_a.jpeg',
-    'F54038CF-35BD-48F5-9C80-5B7654F92D7C_1_105_c.jpeg'
-  ];
-  var gallery = document.getElementById('photo-gallery');
-  // skip first (used in frame) — show rest
-  gallery.innerHTML = photos.slice(1).map(function(p) {
-    return '<img src="photos/' + p + '" alt="Gryffin">';
-  }).join('');
-})();
 </script>
 </body>
 </html>

@@ -1,5 +1,13 @@
 [
   {
+    "name": "Gryffin",
+    "location": "Nassau, NY, USA",
+    "lat": 40.685,
+    "lng": -73.584,
+    "continent": "North America",
+    "description": "A very distinguished pony."
+  },
+  {
     "name": "Snorri",
     "location": "Akureyri, Iceland",
     "lat": 65.68,
@@ -30,13 +38,5 @@
     "lng": 151.2,
     "continent": "Oceania",
     "description": "A brumby who was once politely asked to leave a shopping centre."
-  },
-  {
-    "name": "Biscuit",
-    "location": "Montana, USA",
-    "lat": 46.88,
-    "lng": -110.36,
-    "continent": "North America",
-    "description": "Quarter horse. Very fast. Very opinionated about hats."
   }
 ]
