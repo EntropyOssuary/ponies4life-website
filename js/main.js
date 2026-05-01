@@ -82,6 +82,14 @@ function enterMemorialGarden() {
 })();
 
 // ---- LOAD JSON & RENDER GRAVESTONES ----
+var defaultStones = [
+  'gothic-headstone.png',
+  'broken-headstone.png',
+  'cracked-headstone.png',
+  'coffin-gravestone.png',
+  '3ball-gravestone.png'
+];
+
 function loadGravestones() {
   var grid = document.getElementById('grave-grid');
   if (!grid) return;
@@ -90,14 +98,18 @@ function loadGravestones() {
     .then(function (stones) {
       var countEl = document.getElementById('grave-count');
       if (countEl) countEl.textContent = stones.length;
-      grid.innerHTML = stones.map(function (s) {
+      grid.innerHTML = stones.map(function (s, i) {
         var tilt = (Math.random() * 6 - 3).toFixed(1);
+        var stoneImg = s.stone || defaultStones[i % defaultStones.length];
         return [
           '<div class="gravestone" style="transform:rotate(' + tilt + 'deg)">',
-            deathHeadSVG(),
-            '<div class="stone-name">' + esc(s.name) + '</div>',
-            s.dates ? '<div class="stone-dates">' + esc(s.dates) + '</div>' : '',
-            s.epitaph ? '<div class="stone-epitaph">' + esc(s.epitaph) + '</div>' : '',
+            '<img class="stone-img" src="' + esc(stoneImg) + '" alt="">',
+            '<div class="stone-content">',
+              '<img class="death-head-img" src="OIP.RVbrBiy_Wj4kzJZw83lI3wHaCH.png" alt="">',
+              '<div class="stone-name">' + esc(s.name) + '</div>',
+              s.dates ? '<div class="stone-dates">' + esc(s.dates) + '</div>' : '',
+              s.epitaph ? '<div class="stone-epitaph">' + esc(s.epitaph) + '</div>' : '',
+            '</div>',
           '</div>'
         ].join('');
       }).join('');

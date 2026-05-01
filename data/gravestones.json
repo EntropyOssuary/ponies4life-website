@@ -1,17 +1,20 @@
 [
   {
     "name": "Sonny",
-    "dates": "1998 – 2018",
-    "epitaph": "A Girl's Best Friend"
+    "dates": "1998 \u2013 2018",
+    "epitaph": "A Girl's Best Friend",
+    "stone": "3ball-gravestone.png"
   },
   {
     "name": "Ben",
     "dates": "RIP ~ 2024",
-    "epitaph": "A very good boy"
+    "epitaph": "A very good boy",
+    "stone": "skull-headstone.png"
   },
   {
     "name": "Kaylee",
     "dates": "Running Free since 2023",
-    "epitaph": ""
+    "epitaph": "",
+    "stone": "cracked-oval-headstone.png"
   }
 ]
