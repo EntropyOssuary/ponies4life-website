@@ -165,8 +165,7 @@
     </div>
   </div>
 </div>
-<iframe id="yt-player" style="position:fixed;top:-400px;left:-400px;width:320px;height:180px;pointer-events:none"
-  frameborder="0" allow="autoplay *; encrypted-media *" allowfullscreen></iframe>
+<div id="yt-player" style="position:fixed;top:-400px;left:-400px;width:320px;height:180px;pointer-events:none"></div>
 
 <div class="page-wrap" style="max-width:1100px;background:transparent;border:none;">
 
@@ -252,19 +251,8 @@
 
 <script src="js/main.js"></script>
 <script>
-// Auto-fire autoplay if arriving from gate (user already clicked ENTER)
-if (sessionStorage.getItem('gardenAutoplay') === '1') {
-  sessionStorage.removeItem('gardenAutoplay');
-  // Start music without popup (interaction already happened on gate page)
-  var iframe = document.getElementById('yt-player');
-  if (iframe) {
-    iframe.src = 'https://www.youtube-nocookie.com/embed/zuuObGsB0No?autoplay=1&loop=1&playlist=zuuObGsB0No&controls=0&rel=0';
-    // Love Will Tear Us Apart — Joy Division (verify ID: zuuObGsB0No)
-  }
-  document.getElementById('autoplay-overlay').style.display = 'none';
-} else {
-  initAutoplay('zuuObGsB0No');
-}
+sessionStorage.removeItem('gardenAutoplay');
+initAutoplay('zuuObGsB0No'); // Love Will Tear Us Apart — Joy Division
 
 loadGravestones();
 </script>

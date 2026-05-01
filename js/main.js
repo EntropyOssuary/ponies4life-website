@@ -7,20 +7,61 @@ function revealEmail(btn) {
   window.location.href = 'mailto:' + e;
 }
 
-// ---- AUTOPLAY POPUP ----
-// Call with YouTube video ID. Sets iframe src on OK click.
+// ---- AUTOPLAY POPUP (YouTube IFrame API — works in Safari) ----
 function initAutoplay(ytId) {
   var overlay = document.getElementById('autoplay-overlay');
   var okBtn   = document.getElementById('popup-ok');
-  var iframe  = document.getElementById('yt-player');
   if (!overlay || !okBtn) return;
   overlay.classList.add('active');
+
+  var player      = null;
+  var playerReady = false;
+  var playWanted  = false;
+
+  function tryPlay() {
+    if (player && playerReady) {
+      player.unMute();
+      player.setVolume(100);
+      player.playVideo();
+    } else {
+      playWanted = true;
+    }
+  }
+
+  function createPlayer() {
+    var el = document.getElementById('yt-player');
+    if (!el || player) return;
+    player = new YT.Player('yt-player', {
+      videoId: ytId,
+      playerVars: { autoplay: 0, loop: 1, playlist: ytId, controls: 0, rel: 0, playsinline: 1 },
+      events: {
+        onReady: function () {
+          playerReady = true;
+          if (playWanted) tryPlay();
+        }
+      }
+    });
+  }
+
+  // Load YT IFrame API script once
+  if (!window._ytApiLoading) {
+    window._ytApiLoading = true;
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  }
+  // onYouTubeIframeAPIReady is called globally by the YT script
+  var prev = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function () {
+    if (prev) prev();
+    createPlayer();
+  };
+  // If API already loaded
+  if (window.YT && window.YT.Player) createPlayer();
+
   okBtn.addEventListener('click', function () {
     overlay.classList.remove('active');
-    if (iframe && ytId) {
-      iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytId +
-        '?autoplay=1&loop=1&playlist=' + ytId + '&controls=0&rel=0';
-    }
+    tryPlay();
   });
 }
 
