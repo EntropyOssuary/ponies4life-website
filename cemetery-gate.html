@@ -14,23 +14,50 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    overflow-x: hidden;
   }
-  .gate-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 20px;
-    text-align: center;
-  }
-  .gate-text-above {
+
+  .gate-title {
     font-family: "Georgia", serif;
-    color: #888;
-    font-size: 0.85em;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-    font-style: italic;
+    color: #c0b0d0;
+    font-size: 1.4em;
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    text-shadow: 0 0 18px rgba(200,150,255,0.35);
+    margin: 160px 0 10px;
+    position: relative; z-index: 5;
+    text-align: center;
+    padding: 0 20px;
   }
+
+  /* Moon clouds strip at top */
+  .moon-clouds {
+    position: fixed;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: min(700px, 100vw);
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.7;
+    mix-blend-mode: screen;
+  }
+
+  /* Gate scene wrapper */
+  .gate-scene {
+    position: relative;
+    width: min(480px, 90vw);
+    margin: 0 auto;
+    z-index: 3;
+  }
+  .gate-img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    filter: invert(1) brightness(0.5) hue-rotate(200deg) saturate(0.6);
+    opacity: 0.78;
+    display: block;
+  }
+
   .enter-btn {
     background: #0a0a0a;
     border: 2px solid #666;
@@ -40,23 +67,29 @@
     letter-spacing: 5px;
     padding: 14px 40px;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 24px;
     transition: all 0.3s;
     text-transform: uppercase;
+    position: relative; z-index: 5;
   }
   .enter-btn:hover {
     border-color: #aaa;
     color: #eee;
     box-shadow: 0 0 20px rgba(200,200,200,0.2);
   }
-  .gate-text-below {
-    font-family: "Georgia", serif;
-    color: #aaa;
-    font-size: 1.3em;
-    margin-top: 16px;
-    letter-spacing: 3px;
-    text-shadow: 0 0 12px rgba(180,150,220,0.4);
+
+  /* Fog at bottom */
+  @keyframes fog1 { 0%{transform:translateX(-12%);opacity:0} 20%{opacity:1} 80%{opacity:1} 100%{transform:translateX(12%);opacity:0} }
+  @keyframes fog2 { 0%{transform:translateX(12%);opacity:0} 20%{opacity:1} 80%{opacity:1} 100%{transform:translateX(-12%);opacity:0} }
+  .fog {
+    position: fixed; bottom: 0; left: -20%; width: 140%;
+    pointer-events: none; z-index: 2; border-radius: 50% 50% 0 0;
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
   }
+  .fog-1 { height: 90px; background: linear-gradient(180deg,transparent,rgba(140,200,170,0.10) 50%,rgba(140,200,170,0.18)); animation: fog1 22s ease-in-out infinite; }
+  .fog-2 { height: 60px; background: linear-gradient(180deg,transparent,rgba(140,200,170,0.07) 50%,rgba(140,200,170,0.12)); animation: fog2 30s ease-in-out infinite; }
+
   @keyframes flicker { 0%,100%{opacity:1} 92%{opacity:1} 93%{opacity:0.8} 94%{opacity:1} 97%{opacity:0.9} }
   .flicker { animation: flicker 5s infinite; }
 </style>
@@ -78,14 +111,21 @@
 </div>
 <div id="yt-player" style="position:fixed;top:-400px;left:-400px;width:320px;height:180px;pointer-events:none"></div>
 
-<div class="gate-page">
-  <p class="gate-text-above flicker">ponies4.life</p>
+<!-- Moon clouds -->
+<img src="moon-clouds.gif" alt="" class="moon-clouds">
 
-  <img src="cemetery-gate-1.png" alt="Cemetery Gate" style="width:min(480px,90vw);filter:invert(1) brightness(0.82);display:block;margin:0 auto;" class="flicker">
+<!-- Fog -->
+<div class="fog fog-1"></div>
+<div class="fog fog-2"></div>
 
-  <button class="enter-btn" onclick="enterGarden()">E N T E R</button>
-  <p class="gate-text-below">The Heart Horse Memorial Garden</p>
+<p class="gate-title">The Heart Horse Memorial Garden</p>
+
+<div class="gate-scene">
+  <img src="cemetery-gate-1.png" alt="Cemetery Gate" class="gate-img flicker">
 </div>
+
+<button class="enter-btn" onclick="enterGarden()">E N T E R</button>
+<a href="index.html" style="display:inline-block;margin-top:20px;color:#555;font-family:'Georgia',serif;font-size:0.8em;letter-spacing:2px;text-decoration:none;border-bottom:1px solid #333;position:relative;z-index:5;">← Back to the World</a>
 
 <script src="js/main.js"></script>
 <script>

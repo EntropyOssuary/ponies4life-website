@@ -88,8 +88,7 @@ var defaultStones = [
   'cracked-headstone.png',
   'coffin-gravestone.png',
   '3ball-gravestone.png',
-  'photos/pointy-gravestone.png',
-  'photos/skull-gravestone.png'
+  'photos/pointy-gravestone.png'
 ];
 
 function loadGravestones() {
@@ -103,11 +102,13 @@ function loadGravestones() {
       grid.innerHTML = stones.map(function (s, i) {
         var tilt = (Math.random() * 6 - 3).toFixed(1);
         var stoneImg = s.stone || defaultStones[i % defaultStones.length];
+        var skipSkull = /pointy/i.test(stoneImg);
+        var stoneClass = 'stone-' + stoneImg.replace(/.*\//, '').replace(/\.[^.]+$/, '').toLowerCase();
         return [
-          '<div class="gravestone" style="transform:rotate(' + tilt + 'deg)">',
+          '<div class="gravestone ' + stoneClass + '" style="transform:rotate(' + tilt + 'deg)">',
             '<img class="stone-img" src="' + esc(stoneImg) + '" alt="">',
-            '<div class="stone-content">',
-              '<img class="death-head-img" src="OIP.RVbrBiy_Wj4kzJZw83lI3wHaCH.png" alt="">',
+            skipSkull ? '' : '<img class="stone-skull" src="cropped-winged-skull.png" alt="">',
+            '<div class="stone-text">',
               '<div class="stone-name">' + esc(s.name) + '</div>',
               s.dates ? '<div class="stone-dates">' + esc(s.dates) + '</div>' : '',
               s.epitaph ? '<div class="stone-epitaph">' + esc(s.epitaph) + '</div>' : '',

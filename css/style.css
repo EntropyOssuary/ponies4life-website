@@ -257,45 +257,56 @@ nav.geocities-nav a:hover {
   height: auto;
   display: block;
 }
-.gravestone .stone-content {
+.gravestone .stone-skull {
   position: absolute;
-  top: 38%;
+  top: 22%;
   left: 50%;
   transform: translateX(-50%);
-  width: 76%;
+  width: 58%;
+  max-width: 120px;
+  display: block;
+  mix-blend-mode: multiply;
+  opacity: 0.72;
+}
+/* deeper skulls for stones with taller tops */
+.stone-3ball-gravestone .stone-skull,
+.stone-gothic-headstone .stone-skull,
+.stone-cracked-headstone .stone-skull { top: 30%; }
+
+.gravestone .stone-text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
   text-align: center;
 }
-.gravestone .death-head-img {
-  width: 52%;
-  max-width: 80px;
-  display: block;
-  margin: 0 auto 4px;
-  mix-blend-mode: multiply;
-}
 @media (min-width: 701px) {
-  .gravestone .death-head-img { max-width: 100px; }
+  .gravestone .stone-skull { max-width: 140px; }
 }
 .gravestone .stone-name {
-  font-size: 0.78em;
+  font-size: 1.75em;
   font-weight: bold;
-  letter-spacing: 1px;
-  margin: 2px 0;
+  letter-spacing: 2px;
+  margin: 0 0 3px;
   text-transform: uppercase;
   color: #1a1520;
   text-shadow: none;
+  word-break: break-word;
 }
 .gravestone .stone-dates {
-  font-size: 0.6em;
+  font-size: 0.82em;
   letter-spacing: 1px;
   margin: 2px 0;
   color: #2a2030;
 }
 .gravestone .stone-epitaph {
-  font-size: 0.56em;
+  font-size: 0.76em;
   font-style: italic;
-  margin-top: 3px;
-  line-height: 1.35;
+  margin-top: 5px;
+  line-height: 1.45;
   color: #2a2030;
+  word-break: break-word;
 }
 
 /* silhouette scene strips */
