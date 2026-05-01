@@ -8,7 +8,7 @@ function revealEmail(btn) {
 }
 
 // ---- AUTOPLAY POPUP (YouTube IFrame API — works in Safari) ----
-function initAutoplay(ytId) {
+function initAutoplay(ytId, startSeconds) {
   var overlay = document.getElementById('autoplay-overlay');
   var okBtn   = document.getElementById('popup-ok');
   if (!overlay || !okBtn) return;
@@ -33,7 +33,7 @@ function initAutoplay(ytId) {
     if (!el || player) return;
     player = new YT.Player('yt-player', {
       videoId: ytId,
-      playerVars: { autoplay: 0, loop: 1, playlist: ytId, controls: 0, rel: 0, playsinline: 1 },
+      playerVars: { autoplay: 0, loop: 1, playlist: ytId, controls: 0, rel: 0, playsinline: 1, start: startSeconds || 0 },
       events: {
         onReady: function () {
           playerReady = true;
@@ -71,13 +71,14 @@ function enterMemorialGarden() {
   window.location.href = 'memorial-garden.html';
 }
 
-// ---- VISITOR COUNTER ----
+// ---- VISITOR COUNTER (real — counterapi.dev) ----
 (function () {
-  var key = 'p4l_hits';
-  var n   = parseInt(localStorage.getItem(key) || '41337', 10) + 1;
-  localStorage.setItem(key, n);
-  var el  = document.getElementById('visitor-count');
-  if (el) el.textContent = String(n).padStart(7, '0');
+  var el = document.getElementById('visitor-count');
+  if (!el) return;
+  fetch('https://api.counterapi.dev/v1/ponies4life/hits/up')
+    .then(function (r) { return r.json(); })
+    .then(function (d) { el.textContent = String(d.count).padStart(7, '0'); })
+    .catch(function () { el.textContent = '✦✦✦✦✦✦✦'; });
 })();
 
 // ---- LOAD JSON & RENDER GRAVESTONES ----

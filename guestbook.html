@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guestbook — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .guestbook-entry {
+    background: rgba(0,0,80,0.5);
+    border: 2px solid var(--neon-cyan);
+    border-left: 6px solid var(--neon-pink);
+    padding: 12px 16px;
+    margin: 10px auto;
+    max-width: 640px;
+    text-align: left;
+  }
+  .entry-name {
+    color: var(--neon-yellow);
+    font-weight: bold;
+    font-size: 1em;
+  }
+  .entry-location {
+    color: #888;
+    font-size: 0.8em;
+    margin-left: 8px;
+  }
+  .entry-date {
+    color: #555;
+    font-size: 0.75em;
+    float: right;
+  }
+  .entry-message {
+    color: #ddd;
+    font-size: 0.9em;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .gb-form {
+    background: rgba(0,0,60,0.6);
+    border: 3px solid var(--neon-pink);
+    padding: 20px;
+    margin: 16px auto;
+    max-width: 640px;
+  }
+  .gb-form h3 { color: var(--neon-pink); margin: 0 0 14px; font-size: 1.2em; }
+  .gb-form input,
+  .gb-form textarea {
+    width: 100%;
+    background: #000;
+    border: 2px solid #444;
+    color: #fff;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 0.9em;
+    padding: 8px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .gb-form input:focus,
+  .gb-form textarea:focus {
+    border-color: var(--neon-cyan);
+    outline: none;
+  }
+  .gb-form textarea { height: 90px; resize: vertical; }
+  .gb-form label { color: #aaa; font-size: 0.8em; display: block; margin-bottom: 3px; }
+  .gb-submit {
+    background: linear-gradient(135deg, #ff00ff, #0000ff);
+    border: 2px outset #fff;
+    color: #fff;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 8px 24px;
+    cursor: pointer;
+    letter-spacing: 1px;
+  }
+  .gb-submit:hover { background: linear-gradient(135deg, #ff44ff, #4444ff); }
+  .gb-submit:active { border-style: inset; }
+  .hidden { display: none; }
+  .gb-note {
+    color: #666;
+    font-size: 0.75em;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  .success-msg {
+    display: none;
+    background: #003300;
+    border: 2px solid var(--neon-lime);
+    color: var(--neon-lime);
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 0.9em;
+  }
+  .gb-empty {
+    color: #555;
+    font-style: italic;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <div class="page-title-bar">📖 GUESTBOOK 📖</div>
+
+  <nav class="geocities-nav">
+    <a href="index.html">🏠 HOME</a>
+    <a href="pony-of-the-month.html">🏆 PONY OF THE MONTH</a>
+    <a href="ponies-around-the-world.html">🌍 AROUND THE WORLD</a>
+    <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
+    <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
+    <a href="guestbook.html">📖 GUESTBOOK</a>
+  </nav>
+
+  <hr class="rainbow-hr">
+
+  <p class="sparkle-text">✨ You were here. Leave your mark. ✨</p>
+  <p style="color:#aaa;font-size:0.85em;">Sign the guestbook and let us know you stopped by.<br>
+  <span style="font-size:0.9em;color:#666">All entries reviewed before appearing. Be excellent to each other.</span></p>
+
+  <div class="star-divider">★ ★ ★</div>
+
+  <!-- SIGN THE GUESTBOOK -->
+  <div class="gb-form">
+    <h3>✍ Sign the Guestbook</h3>
+    <form name="guestbook" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="gb-form">
+      <input type="hidden" name="form-name" value="guestbook">
+      <p class="hidden"><label>Do not fill this out: <input name="bot-field"></label></p>
+
+      <label for="gb-name">Your name *</label>
+      <input type="text" id="gb-name" name="name" placeholder="Your name" required maxlength="60">
+
+      <label for="gb-location">Where are you from? (optional)</label>
+      <input type="text" id="gb-location" name="location" placeholder="City, Country" maxlength="80">
+
+      <label for="gb-message">Message * (300 characters max)</label>
+      <textarea id="gb-message" name="message" placeholder="Say something nice about ponies..." required maxlength="300"></textarea>
+
+      <button type="submit" class="gb-submit">✨ SIGN IT ✨</button>
+      <p class="gb-note">Entries are reviewed before appearing on the page. No spam, no nonsense.</p>
+    </form>
+    <div class="success-msg" id="success-msg">
+      🐴 Thank you for signing! Your entry will appear after review.
+    </div>
+  </div>
+
+  <hr class="rainbow-hr">
+
+  <!-- DISPLAY ENTRIES -->
+  <div id="gb-entries">
+    <div class="gb-empty">Be the first to sign!</div>
+  </div>
+
+  <div class="counter-wrap">
+    <span class="counter-label">SITE VISITORS</span>
+    <span id="visitor-count">0000000</span>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+// Handle form submission via fetch (prevents page redirect)
+document.getElementById('gb-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = this;
+  var data = new FormData(form);
+  fetch('/', { method: 'POST', body: data })
+    .then(function() {
+      form.style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    })
+    .catch(function() {
+      // fallback: just submit normally
+      form.submit();
+    });
+});
+
+// Load displayed entries from JSON
+fetch('data/guestbook.json')
+  .then(function(r) { return r.json(); })
+  .then(function(entries) {
+    if (!entries.length) return;
+    var container = document.getElementById('gb-entries');
+    container.innerHTML = entries.map(function(e) {
+      return [
+        '<div class="guestbook-entry">',
+          '<span class="entry-date">' + esc(e.date || '') + '</span>',
+          '<span class="entry-name">' + esc(e.name) + '</span>',
+          e.location ? '<span class="entry-location">📍 ' + esc(e.location) + '</span>' : '',
+          '<div class="entry-message">' + esc(e.message) + '</div>',
+        '</div>'
+      ].join('');
+    }).join('');
+  });
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
