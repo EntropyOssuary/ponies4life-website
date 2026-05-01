@@ -90,6 +90,19 @@
 </style>
 </head>
 <body class="hunt-club">
+<div id="autoplay-overlay" class="win95-overlay">
+  <div class="win95-popup">
+    <div class="win95-titlebar">
+      <span>ponies4.life</span>
+      <button class="win95-close" disabled>✕</button>
+    </div>
+    <div class="win95-body">
+      <p>For the full experience, enable autoplay.</p>
+      <button id="popup-ok" class="win95-ok">OK</button>
+    </div>
+  </div>
+</div>
+<div id="yt-player" style="position:fixed;top:-400px;left:-400px;width:320px;height:180px;pointer-events:none"></div>
 
 <!-- Autoplay popup — no music specified for HOF in brief, skip -->
 
@@ -155,6 +168,9 @@
 </div>
 
 <script src="js/main.js"></script>
-<script>loadHallOfFame();</script>
+<script>
+loadHallOfFame();
+initAutoplay('mk48xRzuNvA', 30);
+</script>
 </body>
 </html>
