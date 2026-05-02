@@ -123,25 +123,26 @@
   <!-- SIGN THE GUESTBOOK -->
   <div class="gb-form">
     <h3>✍ Sign the Guestbook</h3>
-    <form name="guestbook" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="gb-form">
-      <input type="hidden" name="form-name" value="guestbook">
-      <p class="hidden"><label>Do not fill this out: <input name="bot-field"></label></p>
+    <div data-fs-success id="success-msg">
+      🐴 Thank you for signing! Your entry will appear after review.
+    </div>
+    <div data-fs-error style="color:#ff6666;margin-bottom:10px;font-size:0.85em"></div>
 
+    <form id="gb-form">
       <label for="gb-name">Your name *</label>
-      <input type="text" id="gb-name" name="name" placeholder="Your name" required maxlength="60">
+      <input type="text" id="gb-name" name="name" placeholder="Your name" required maxlength="60" data-fs-field>
+      <span data-fs-error="name" style="color:#ff6666;font-size:0.8em"></span>
 
       <label for="gb-location">Where are you from? (optional)</label>
       <input type="text" id="gb-location" name="location" placeholder="City, Country" maxlength="80">
 
       <label for="gb-message">Message * (300 characters max)</label>
-      <textarea id="gb-message" name="message" placeholder="Say something nice about ponies..." required maxlength="300"></textarea>
+      <textarea id="gb-message" name="message" placeholder="Say something nice about ponies..." required maxlength="300" data-fs-field></textarea>
+      <span data-fs-error="message" style="color:#ff6666;font-size:0.8em"></span>
 
-      <button type="submit" class="gb-submit">✨ SIGN IT ✨</button>
+      <button type="submit" class="gb-submit" data-fs-submit-btn>✨ SIGN IT ✨</button>
       <p class="gb-note">Entries are reviewed before appearing on the page. No spam, no nonsense.</p>
     </form>
-    <div class="success-msg" id="success-msg">
-      🐴 Thank you for signing! Your entry will appear after review.
-    </div>
   </div>
 
   <hr class="rainbow-hr">
@@ -159,21 +160,8 @@
 
 <script src="js/main.js"></script>
 <script>
-// Handle form submission via fetch (prevents page redirect)
-document.getElementById('gb-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var form = this;
-  var data = new FormData(form);
-  fetch('/', { method: 'POST', body: data })
-    .then(function() {
-      form.style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
-    })
-    .catch(function() {
-      // fallback: just submit normally
-      form.submit();
-    });
-});
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#gb-form', formId: 'xojrvker' });
 
 // Load displayed entries from JSON
 fetch('data/guestbook.json')
@@ -197,5 +185,6 @@ function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
