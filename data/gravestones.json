@@ -16,5 +16,11 @@
     "dates": "Running Free since 2023",
     "epitaph": "",
     "stone": "cracked-oval-headstone.png"
+  },
+  {
+    "name": "Jameson",
+    "dates": "2010 – 2022",
+    "epitaph": "He cost everything. Wouldn't trade it for the world🖤",
+    "stone": "broken-headstone.png"
   }
 ]
