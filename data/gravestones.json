@@ -9,18 +9,30 @@
     "name": "Ben",
     "dates": "RIP ~ 2024",
     "epitaph": "A very good boy",
-    "stone": "3ball-gravestone.png"
+    "stone": "broken-headstone.png"
   },
   {
     "name": "Kaylee",
     "dates": "Running Free since 2023",
     "epitaph": "",
-    "stone": "broken-headstone.png"
+    "stone": "coffin-gravestone.png"
   },
   {
     "name": "Jameson",
     "dates": "2010 – 2022",
     "epitaph": "He cost everything. Wouldn't trade it for the world🖤",
     "stone": "cracked-oval-headstone.png"
+  },
+  {
+    "name": "Quickstone",
+    "dates": "2008 – 2024",
+    "epitaph": "The most expensive free horse there ever was, who despised Miller Lite and the color purple",
+    "stone": "3ball-gravestone.png"
+  },
+  {
+    "name": "Little Bit",
+    "dates": "circa 2013",
+    "epitaph": "The gentle old giant who taught me to ride",
+    "stone": "cracked-headstone.png"
   }
 ]
