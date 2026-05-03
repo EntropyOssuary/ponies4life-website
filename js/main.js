@@ -75,7 +75,11 @@ function enterMemorialGarden() {
 (function () {
   var el = document.getElementById('visitor-count');
   if (!el) return;
-  fetch('https://api.counterapi.dev/v1/ponies4life/hits/up')
+  var owner = localStorage.getItem('owner');
+  var url = owner
+    ? 'https://api.counterapi.dev/v1/ponies4life/hits'
+    : 'https://api.counterapi.dev/v1/ponies4life/hits/up';
+  fetch(url)
     .then(function (r) { return r.json(); })
     .then(function (d) { el.textContent = String(d.count).padStart(7, '0'); })
     .catch(function () { el.textContent = '✦✦✦✦✦✦✦'; });
