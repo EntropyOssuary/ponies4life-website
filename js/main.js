@@ -7,6 +7,99 @@ function revealEmail(btn) {
   window.location.href = 'mailto:' + e;
 }
 
+// ---- PAGE-SPECIFIC SUBMISSION EMAILS ----
+function submitHallOfFame() {
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🏆 We are SO excited you want to nominate a pony!',
+    '',
+    '————————————————————————',
+    '🏆 HALL OF FAME NOMINATION',
+    '————————————————————————',
+    'Name:',
+    'Location:',
+    'Why do they deserve a spot in the Hall of Fame?:',
+    'Photo (attach!):',
+    '',
+    '————————————————————————',
+    '📌 ALSO ADD TO PONIES AROUND THE WORLD? (optional)',
+    '————————————————————————',
+    'Location (city, country):',
+    'Fun fact or description:',
+    '',
+    'We read every submission and we love them all. Thank you! 🌈'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('Hall of Fame Nomination — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+}
+
+function submitWorldMap() {
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🗺️ We are SO excited you want to put your pony on the map!',
+    '',
+    '————————————————————————',
+    '📌 PONIES AROUND THE WORLD',
+    '————————————————————————',
+    'Name:',
+    'Location (city, country):',
+    'Fun fact or description:',
+    'Photo (attach!):',
+    '',
+    '————————————————————————',
+    '🏆 ALSO NOMINATE FOR HALL OF FAME? (optional)',
+    '————————————————————————',
+    'Why do they deserve a spot in the Hall of Fame?:',
+    '',
+    'We read every submission and we love them all. Thank you! 🌈'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('World Map Submission — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+}
+
+function submitMemorial() {
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🪦 Thank you for sharing your pony with us.',
+    'We are honored to give them a place to rest.',
+    '',
+    '————————————————————————',
+    '🪦 MEMORIAL GARDEN SUBMISSION',
+    '————————————————————————',
+    'Name:',
+    'Dates (e.g. 2005–2022):',
+    'Epitaph (50 characters max):',
+    '',
+    'All submissions reviewed with care. 🖤'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('Memorial Garden Submission — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+}
+
+function submitPonyOfMonth() {
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🌟 You want to nominate a Pony of the Month — we love it!',
+    '',
+    '————————————————————————',
+    '🌟 PONY OF THE MONTH NOMINATION',
+    '————————————————————————',
+    'Name:',
+    'Why should this pony be crowned Pony of the Month?',
+    '(Tell us everything. We want to hear it all.):',
+    '',
+    'Photo (attach!):',
+    '',
+    'We read every nomination. Thank you for sharing! 🌈'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('Pony of the Month Nomination — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+}
+
 // ---- SUBMISSION EMAIL ----
 function submitPony() {
   var u = 'ponies', d = 'ponies4.life';
