@@ -30,6 +30,12 @@
     "stone": "coffin-gravestone.png"
   },
   {
+    "name": "Maverick",
+    "dates": "1985 – 2008",
+    "epitaph": "Born to race, but he never did. He ran like the wind and died too soon, gone but not forgotten.",
+    "stone": "cracked-oval-headstone.png"
+  },
+  {
     "name": "Little Bit",
     "dates": "circa 2013",
     "epitaph": "The gentle old giant who taught me to ride. A very picky eater.",
