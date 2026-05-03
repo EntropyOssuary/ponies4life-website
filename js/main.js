@@ -77,7 +77,7 @@ function enterMemorialGarden() {
   if (!el) return;
   var owner = localStorage.getItem('owner');
   var url = owner
-    ? 'https://api.counterapi.dev/v1/ponies4life/hits'
+    ? 'https://api.counterapi.dev/v1/ponies4life/hits/'
     : 'https://api.counterapi.dev/v1/ponies4life/hits/up';
   fetch(url)
     .then(function (r) { return r.json(); })
