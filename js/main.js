@@ -7,6 +7,39 @@ function revealEmail(btn) {
   window.location.href = 'mailto:' + e;
 }
 
+// ---- SUBMISSION EMAIL ----
+function submitPony() {
+  var u = 'ponies', d = 'ponies4.life';
+  var subject = 'Ponies4.life Submission';
+  var body = [
+    'SUBMISSION CATEGORY (check one):',
+    '[ ] World Map',
+    '[ ] Hall of Fame',
+    '[ ] Pony of the Month nomination',
+    '[ ] Memorial Garden',
+    '',
+    'NAME:',
+    '',
+    'LOCATION (city, country — for World Map):',
+    '',
+    'PHOTO (attach to this email):',
+    '',
+    'DATES (for Memorial Garden — e.g. 2005–2022):',
+    '',
+    'EPITAPH (Memorial Garden, 50 characters max):',
+    '',
+    'HALL OF FAME / PONY OF THE MONTH STATEMENT',
+    '(Why does this pony deserve the honor?):',
+    '',
+    '---',
+    'All submissions subject to editorial review.',
+    'Raccoons welcome.'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent(subject)
+    + '&body=' + encodeURIComponent(body);
+}
+
 // ---- AUTOPLAY POPUP (YouTube IFrame API — works in Safari) ----
 function initAutoplay(ytId, startSeconds) {
   var overlay = document.getElementById('autoplay-overlay');
