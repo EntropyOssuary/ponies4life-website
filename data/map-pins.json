@@ -9,6 +9,20 @@
     "photo": "photos/CE748BE6-8330-4BC9-8567-3E4BB9A77EEE_1_201_a.jpeg"
   },
   {
+    "name": "Smokey",
+    "location": "Rotterdam, NY, USA",
+    "lat": 42.778,
+    "lng": -73.973,
+    "continent": "North America"
+  },
+  {
+    "name": "Dega",
+    "location": "Rotterdam, NY, USA",
+    "lat": 42.776,
+    "lng": -73.971,
+    "continent": "North America"
+  },
+  {
     "name": "Snorri",
     "location": "Akureyri, Iceland",
     "lat": 65.68,
