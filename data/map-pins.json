@@ -1,25 +1,18 @@
 [
   {
     "name": "Gryffin",
-    "location": "Nassau, NY, USA",
-    "lat": 40.685,
-    "lng": -73.584,
+    "location": "Nassau, Rensselaer County, NY",
+    "lat": 42.508,
+    "lng": -73.617,
     "continent": "North America",
     "description": "14.1 and he can jump the moon!",
     "photo": "photos/CE748BE6-8330-4BC9-8567-3E4BB9A77EEE_1_201_a.jpeg"
   },
   {
-    "name": "Smokey",
+    "name": "Smokey & Dega",
     "location": "Rotterdam, NY, USA",
     "lat": 42.778,
     "lng": -73.973,
-    "continent": "North America"
-  },
-  {
-    "name": "Dega",
-    "location": "Rotterdam, NY, USA",
-    "lat": 42.776,
-    "lng": -73.971,
     "continent": "North America"
   },
   {
