@@ -46,7 +46,6 @@ function submitPony() {
     'Name:',
     'Dates (e.g. 2005–2022):',
     'Epitaph (50 characters max):',
-    'Photo (optional, attach!):',
     '',
     '————————————————————————',
     'We read every single submission and we love them all.',
