@@ -27,23 +27,68 @@ function _regNum(prefix) {
   return prefix + '-' + (Math.floor(Math.random() * 9000) + 1000) + '-2026';
 }
 
-function _seal(ctx, cx, cy, r, lineColor, fillColor, lines) {
+function _horseshoe(ctx, cx, cy, size, color) {
+  // U-shape open at bottom: arch goes clockwise from 210° to 330°, passing through 270° (top)
+  var outerR = size;
+  var innerR = size * 0.58;
+  var a1 = Math.PI * 7 / 6;  // 210°
+  var a2 = Math.PI * 11 / 6; // 330°
+  var prongLen = size * 0.65;
+
+  ctx.fillStyle = color;
+
+  // Arch: clockwise (anticlockwise=false) from a1 to a2 passes through 270° (top)
+  ctx.beginPath();
+  ctx.arc(cx, cy, outerR, a1, a2, false);
+  ctx.arc(cx, cy, innerR, a2, a1, true);
+  ctx.closePath();
+  ctx.fill();
+
+  // Left prong
+  var lox = cx + outerR * Math.cos(a1), loy = cy + outerR * Math.sin(a1);
+  var lix = cx + innerR * Math.cos(a1), liy = cy + innerR * Math.sin(a1);
+  ctx.beginPath();
+  ctx.moveTo(lox, loy); ctx.lineTo(lox, loy + prongLen);
+  ctx.lineTo(lix, liy + prongLen); ctx.lineTo(lix, liy);
+  ctx.closePath(); ctx.fill();
+
+  // Right prong
+  var rox = cx + outerR * Math.cos(a2), roy = cy + outerR * Math.sin(a2);
+  var rix = cx + innerR * Math.cos(a2), riy = cy + innerR * Math.sin(a2);
+  ctx.beginPath();
+  ctx.moveTo(rox, roy); ctx.lineTo(rox, roy + prongLen);
+  ctx.lineTo(rix, riy + prongLen); ctx.lineTo(rix, riy);
+  ctx.closePath(); ctx.fill();
+
+  // Nail holes
+  var midR = (outerR + innerR) / 2;
+  var nailR = Math.max(1.2, size * 0.055);
+  ctx.fillStyle = 'rgba(0,0,0,0.4)';
+  for (var i = 0; i < 6; i++) {
+    var angle = a1 + (i + 0.5) / 6 * (a2 - a1);
+    ctx.beginPath();
+    ctx.arc(cx + midR * Math.cos(angle), cy + midR * Math.sin(angle), nailR, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function _seal(ctx, cx, cy, r, lineColor, fillColor) {
+  // Circles
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fillStyle = fillColor;
-  ctx.fill();
-  ctx.strokeStyle = lineColor; ctx.lineWidth = 2;
-  ctx.stroke();
+  ctx.fillStyle = fillColor; ctx.fill();
+  ctx.strokeStyle = lineColor; ctx.lineWidth = 2; ctx.stroke();
   ctx.beginPath();
   ctx.arc(cx, cy, r - 8, 0, Math.PI * 2);
   ctx.lineWidth = 0.8; ctx.stroke();
-  ctx.fillStyle = lineColor;
-  ctx.textAlign = 'center';
-  var startY = cy - (lines.length - 1) * 5.5;
-  lines.forEach(function(line, i) {
-    ctx.font = (i === 0 ? 'bold ' : '') + '7.5px Georgia, serif';
-    ctx.fillText(line, cx, startY + i * 11);
-  });
+
+  // Horseshoe — centered slightly above middle so prongs balance the arch
+  _horseshoe(ctx, cx, cy + 4, r - 14, lineColor);
+
+  // Label
+  ctx.fillStyle = lineColor; ctx.textAlign = 'center';
+  ctx.font = 'bold 7px Georgia, serif';
+  ctx.fillText('OFFICIAL SEAL', cx, cy + r - 11);
 }
 
 // ---- HALL OF FAME CERTIFICATE (dark gold, hunt-club) ----
@@ -141,20 +186,20 @@ function drawHOFCertificate(canvas, ponuName, ownerName) {
   ctx.beginPath(); ctx.moveTo(95, 470); ctx.lineTo(280, 470); ctx.stroke();
   ctx.textAlign = 'left';
   ctx.fillStyle = '#8b7030'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('Gryffin von Applegate III', 95, 485);
+  ctx.fillText('Sonny Wimps Gunshot', 95, 485);
   ctx.fillStyle = '#4a3408'; ctx.font = '10px Georgia, serif';
   ctx.fillText('Chair, Selection Committee', 95, 498);
 
   ctx.beginPath(); ctx.moveTo(520, 470); ctx.lineTo(705, 470); ctx.stroke();
   ctx.textAlign = 'right';
   ctx.fillStyle = '#8b7030'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('Smokescreen, Secretary', 705, 485);
+  ctx.fillText('Gryffins Sonny Mojo', 705, 485);
   ctx.fillStyle = '#4a3408'; ctx.font = '10px Georgia, serif';
-  ctx.fillText('Ponies4.Life Official Records', 705, 498);
+  ctx.fillText('Secretary, Official Records', 705, 498);
 
   // Seal
   ctx.textAlign = 'center';
-  _seal(ctx, W/2, 484, 36, '#b8860b', 'rgba(184,134,11,0.10)', ['OFFICIAL', 'SEAL']);
+  _seal(ctx, W/2, 484, 36, '#b8860b', 'rgba(184,134,11,0.10)');
 
   // Registry number
   ctx.fillStyle = '#2e1e00'; ctx.font = '9px monospace';
@@ -255,20 +300,20 @@ function drawPATWCertificate(canvas, ponuName, ownerName, location) {
   ctx.beginPath(); ctx.moveTo(78, 432); ctx.lineTo(268, 432); ctx.stroke();
   ctx.textAlign = 'left';
   ctx.fillStyle = '#3a4a6a'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('Danielle N., Registrar', 78, 447);
+  ctx.fillText('Sonny Wimps Gunshot', 78, 447);
   ctx.fillStyle = '#888'; ctx.font = '9px Georgia, serif';
-  ctx.fillText('Director of Geographic Operations', 78, 459);
+  ctx.fillText('Chair, Selection Committee', 78, 459);
 
   ctx.beginPath(); ctx.moveTo(532, 432); ctx.lineTo(722, 432); ctx.stroke();
   ctx.textAlign = 'right';
   ctx.fillStyle = '#3a4a6a'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('Gryffin von Applegate III', 722, 447);
+  ctx.fillText('Gryffins Sonny Mojo', 722, 447);
   ctx.fillStyle = '#888'; ctx.font = '9px Georgia, serif';
-  ctx.fillText('Chairpony, Admissions Committee', 722, 459);
+  ctx.fillText('Secretary, Official Records', 722, 459);
 
   // Seal
   ctx.textAlign = 'center';
-  _seal(ctx, W/2, 484, 36, '#1a2844', 'rgba(26,40,68,0.08)', ['OFFICIAL', 'REGISTRY', 'SEAL']);
+  _seal(ctx, W/2, 484, 36, '#1a2844', 'rgba(26,40,68,0.08)');
 
   // Registry number
   ctx.fillStyle = '#aaaaaa'; ctx.font = '9px monospace';
