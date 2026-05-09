@@ -34,6 +34,59 @@
   }
   .chip-done   { background: #003300; color: #00ff88; border-color: #00ff88; }
   .chip-needed { background: #330000; color: #ff6666; border-color: #ff4444; }
+  .patw-promo {
+    background: rgba(0,0,80,0.55);
+    border: 2px solid var(--neon-yellow);
+    padding: 13px 18px;
+    margin: 12px auto;
+    max-width: 540px;
+  }
+  .patw-promo .promo-title { color: var(--neon-yellow); font-weight: bold; font-size: 1em; margin: 0 0 6px; }
+  .patw-promo p { color: #ddd; font-size: 0.85em; line-height: 1.7; margin: 0; }
+  .cert-form-section {
+    background: rgba(0,0,60,0.5);
+    border: 2px solid var(--neon-pink);
+    padding: 16px 18px;
+    margin: 12px auto;
+    max-width: 540px;
+  }
+  .cert-form-section .form-title { color: #ffff00; font-weight: bold; margin: 0 0 8px; font-size: 1em; }
+  .cert-form-section .form-note { color: #ddd; font-size: 0.85em; line-height: 1.7; margin: 0 0 10px; }
+  .cert-form { display: flex; flex-direction: column; gap: 8px; margin: 0 0 12px; }
+  .cert-form input, .cert-form textarea {
+    background: rgba(0,0,50,0.8);
+    border: 1px solid var(--neon-cyan);
+    color: #eee;
+    font-family: inherit;
+    font-size: 0.88em;
+    padding: 7px 11px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .cert-form input:focus, .cert-form textarea:focus { border-color: var(--neon-yellow); }
+  .cert-form input::placeholder, .cert-form textarea::placeholder { color: #334; font-style: italic; }
+  .cert-form textarea { resize: vertical; min-height: 55px; }
+  .cert-result {
+    display: none;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--neon-pink);
+    text-align: center;
+  }
+  .cert-result p { color: #aaffcc; font-size: 0.85em; margin: 0 0 10px; }
+  .cert-canvas { display: block; max-width: 100%; border: 1px solid var(--neon-cyan); margin: 0 auto 12px; }
+  .cert-dl-btn {
+    display: inline-block;
+    background: var(--neon-cyan);
+    color: #000;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -63,6 +116,7 @@
     <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
     <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
     <a href="guestbook.html">📖 GUESTBOOK</a>
+    <a href="turnout.html">🌿 TURNOUT</a>
   </nav>
 
   <hr class="rainbow-hr">
@@ -83,14 +137,35 @@
 
   <hr class="rainbow-hr">
 
-  <div style="background:rgba(0,0,60,0.5);border:2px solid var(--neon-pink);padding:14px;margin:12px auto;max-width:520px;">
-    <p style="color:#ffff00;font-weight:bold;margin:0 0 8px;">📬 SUBMIT YOUR PONY</p>
-    <p style="color:#ddd;font-size:0.85em;margin:0 0 10px;">
-      Free to submit. Email only. Include: name, location (city/country), a brief description (optional photo).<br>
-      <span style="color:#aaa">All species welcome. Loosely defined ponies accepted. Raccoons especially.</span><br>
-      <span style="color:#888;font-size:0.9em;">No guaranteed acceptance. Total editorial control.</span>
+  <div class="patw-promo">
+    <p class="promo-title">🐴 2026 — Year of the Horse — Submit Your Pony 🐎</p>
+    <p>
+      In honor of this most auspicious year, the registry is actively seeking new listings from all corners of the globe.
+      All entries received in 2026 will be included in the <strong style="color:var(--neon-yellow)">Year of the Horse Special Edition</strong>
+      of the International Directory — a collector's volume of considerable distinction.
+      Submit your pony. Receive your official listing certificate. Take it very seriously.
     </p>
-    <button class="email-btn" onclick="submitWorldMap()">📧 SUBMIT A PONY</button>
+  </div>
+
+  <div class="cert-form-section">
+    <p class="form-title">📬 SUBMIT YOUR PONY &amp; RECEIVE YOUR CERTIFICATE</p>
+    <p class="form-note">
+      Free to submit. All species welcome. Loosely defined ponies accepted. Raccoons especially.<br>
+      <span style="color:#aaa">No guaranteed acceptance. Total editorial control. The committee's decisions are final.</span>
+    </p>
+    <div class="cert-form">
+      <input type="text" id="patw-pony-name" placeholder="Pony's name (required)" maxlength="60">
+      <input type="text" id="patw-owner-name" placeholder="Owner / companion name (optional)" maxlength="60">
+      <input type="text" id="patw-location" placeholder="Location — city, country (required)" maxlength="80">
+      <textarea id="patw-description" placeholder="Brief description, fun fact, or notable qualities (optional)"></textarea>
+    </div>
+    <button class="email-btn" onclick="submitPATWWithCert()">📧 SUBMIT &amp; RECEIVE CERTIFICATE</button>
+
+    <div class="cert-result" id="patw-cert-result">
+      <p>Your submission has been sent. Here is your official Certificate of Listing. You are now in the registry. Congratulations.</p>
+      <canvas class="cert-canvas" id="patw-cert-canvas"></canvas>
+      <a class="cert-dl-btn" id="patw-cert-dl">⬇ Download Certificate</a>
+    </div>
   </div>
 
   <div class="counter-wrap">
@@ -100,6 +175,7 @@
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/certificates.js"></script>
 <script>
 var continentColors = {
   'Europe':       '#00ccff',
@@ -168,6 +244,47 @@ function esc(s) {
 }
 
 initAutoplay('V_bJf3foa5I'); // Bring on the Dancing Horses — Echo & the Bunnymen
+
+function submitPATWWithCert() {
+  var ponuName = document.getElementById('patw-pony-name').value.trim();
+  var ownerName = document.getElementById('patw-owner-name').value.trim();
+  var location = document.getElementById('patw-location').value.trim();
+  var description = document.getElementById('patw-description').value.trim();
+  if (!ponuName) { alert("Please enter your pony's name to proceed."); return; }
+  if (!location) { alert("Please enter a location to proceed."); return; }
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🗺️ Ponies Around the World submission — 2026 Year of the Horse!',
+    '',
+    '————————————————————————',
+    '📌 PONIES AROUND THE WORLD',
+    '————————————————————————',
+    'Name: ' + ponuName,
+    'Owner/Companion: ' + (ownerName || '(not provided)'),
+    'Location: ' + location,
+    'Description: ' + (description || '(not provided)'),
+    '',
+    'Photo (attach!):',
+    '',
+    '————————————————————————',
+    '🏆 ALSO NOMINATE FOR HALL OF FAME? (optional)',
+    '————————————————————————',
+    'Why do they deserve a spot in the Hall of Fame?:',
+    '',
+    'Thank you! 🌈'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('Ponies Around the World — ' + ponuName + ' — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+
+  var canvas = document.getElementById('patw-cert-canvas');
+  drawPATWCertificate(canvas, ponuName, ownerName, location);
+  var dl = document.getElementById('patw-cert-dl');
+  dl.href = canvas.toDataURL('image/png');
+  dl.download = 'ponies4life-patw-' + ponuName.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.png';
+  document.getElementById('patw-cert-result').style.display = 'block';
+  document.getElementById('patw-cert-result').scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 <script data-goatcounter="https://ponies4life.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

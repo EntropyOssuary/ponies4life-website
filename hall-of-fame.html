@@ -57,6 +57,79 @@
     padding: 40px;
     font-size: 1.05em;
   }
+  /* ---- Cert form ---- */
+  .cert-form-section {
+    background: rgba(20,10,0,0.75);
+    border: 2px solid var(--gold);
+    padding: 18px 20px;
+    margin: 16px auto;
+    max-width: 540px;
+    font-family: "Georgia", serif;
+  }
+  .cert-form-section h3 {
+    color: var(--gold);
+    font-variant: small-caps;
+    letter-spacing: 2px;
+    margin: 0 0 6px;
+    font-size: 1.1em;
+  }
+  .cert-form-section .year-badge {
+    display: inline-block;
+    background: #1a0f00;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.78em;
+    letter-spacing: 2px;
+    padding: 3px 12px;
+    margin: 0 0 10px;
+    font-variant: small-caps;
+  }
+  .cert-form-section p {
+    color: #c8a96e;
+    font-size: 0.85em;
+    line-height: 1.7;
+    margin: 0 0 12px;
+    font-style: italic;
+  }
+  .cert-form { display: flex; flex-direction: column; gap: 9px; margin: 0 0 14px; }
+  .cert-form input, .cert-form textarea {
+    background: #0d0800;
+    border: 1px solid #6a4c10;
+    color: #c8a96e;
+    font-family: "Georgia", serif;
+    font-size: 0.88em;
+    padding: 8px 11px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .cert-form input:focus, .cert-form textarea:focus { border-color: var(--gold); }
+  .cert-form input::placeholder, .cert-form textarea::placeholder { color: #3a2808; font-style: italic; }
+  .cert-form textarea { resize: vertical; min-height: 60px; }
+  .cert-result {
+    display: none;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #6a4c10;
+    text-align: center;
+  }
+  .cert-result p { font-style: italic; color: #c8a96e; font-size: 0.85em; margin: 0 0 10px; }
+  .cert-canvas { display: block; max-width: 100%; border: 1px solid #b8860b; margin: 0 auto 12px; }
+  .cert-dl-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #b8860b, #ffd700);
+    color: #1a0800;
+    font-family: "Georgia", serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    text-decoration: none;
+    border: none;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+
   /* Fox hunt decorative border */
   .hunt-border {
     border: 2px solid var(--gold-dark);
@@ -114,6 +187,7 @@
     <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
     <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
     <a href="guestbook.html">📖 GUESTBOOK</a>
+    <a href="turnout.html">🌿 TURNOUT</a>
   </nav>
 
   <div class="hof-header-crest">🏇</div>
@@ -131,10 +205,13 @@
 
 
   <div style="background:#1a0f00;border:2px solid var(--gold);padding:14px 20px;margin:0 auto 16px;max-width:560px;font-family:Georgia,serif;">
-    <p style="color:var(--gold);font-variant:small-caps;letter-spacing:2px;font-size:1em;margin:0 0 8px;">⭐ Limited Time Grand Opening Offer ⭐</p>
-    <p style="color:#c8a96e;font-size:0.88em;line-height:1.7;margin:0;">
-      Say you were invited by Gryffin using his real full registered name and receive a complimentary Hall of Fame entry —
-      no consideration fee required. <em>Valid for the first 25 entries only.</em>
+    <p style="color:var(--gold);font-variant:small-caps;letter-spacing:2px;font-size:1em;margin:0 0 8px;">⭐ Free Entry — All of 2026 ⭐</p>
+    <p style="color:#c8a96e;font-size:0.88em;line-height:1.7;margin:0 0 6px;">
+      In honor of the <strong style="color:var(--gold)">Year of the Horse</strong>, the committee has waived all consideration fees
+      for the entirety of the 2026 calendar year. This is an unprecedented gesture. It will not happen again.
+    </p>
+    <p style="color:#8b6914;font-size:0.82em;font-style:italic;margin:0;">
+      Submit your nomination below. Receive your official Certificate of Induction immediately. Keep it. Frame it. It is real.
     </p>
   </div>
 
@@ -147,22 +224,27 @@
 
   <hr style="border-color:var(--gold-dark);margin:12px 0;">
 
-  <div class="submission-box">
-    <h3>Nominations & Consideration</h3>
-    <p style="color:#c8a96e;font-size:0.85em;line-height:1.7;margin:0 0 10px;">
-      Nominations for the Hall of Fame are accepted by the committee on a rolling basis.
-      All species welcome. All interpretations of "pony" considered with equal gravity.
+  <div class="cert-form-section">
+    <h3>Nominations &amp; Induction — 2026</h3>
+    <div class="year-badge">Year of the Horse · Free Entry · Class of 2026</div>
+    <p>
+      Nominations are accepted by the committee on a rolling basis. All species welcome.
+      All interpretations of "pony" considered with equal gravity. Fill in your pony's details,
+      submit your nomination by email, and receive your official Certificate of Induction immediately.
     </p>
-    <div class="fee-note">
-      A consideration fee of <strong>$20 USD (Bitcoin via PayPal)</strong> is required with each nomination.
-      This fee is non-refundable and does not guarantee induction.<br>
-      <span style="font-size:0.9em;">The committee's decisions are final, binding, and beyond appeal.</span>
+    <div class="cert-form">
+      <input type="text" id="hof-pony-name" placeholder="Pony's name (required)" maxlength="60">
+      <input type="text" id="hof-owner-name" placeholder="Owner / companion name (optional)" maxlength="60">
+      <textarea id="hof-achievements" placeholder="Notable achievements, qualities, or reason for consideration (optional)"></textarea>
     </div>
-    <p style="color:#888;font-size:0.8em;font-style:italic;margin:0 0 10px;">
-      Nominations by email only. Include name, notable achievements, and reason for consideration.
-    </p>
     <button class="email-btn" style="background:linear-gradient(135deg,#b8860b,#ffd700);color:#1a0800;border-color:#8b6914;"
-      onclick="submitHallOfFame()">✉ SUBMIT NOMINATION</button>
+      onclick="submitHOFWithCert()">✉ NOMINATE &amp; RECEIVE CERTIFICATE</button>
+
+    <div class="cert-result" id="hof-cert-result">
+      <p>Your nomination has been submitted. Here is your official Certificate of Induction. Download it. Keep it. It is real.</p>
+      <canvas class="cert-canvas" id="hof-cert-canvas"></canvas>
+      <a class="cert-dl-btn" id="hof-cert-dl">⬇ Download Certificate</a>
+    </div>
   </div>
 
   <p style="color:#555;font-size:0.75em;font-family:Georgia,serif;font-style:italic;margin:16px;">
@@ -177,9 +259,51 @@
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/certificates.js"></script>
 <script>
 loadHallOfFame();
 initAutoplay('mk48xRzuNvA', 30);
+
+function submitHOFWithCert() {
+  var ponuName = document.getElementById('hof-pony-name').value.trim();
+  var ownerName = document.getElementById('hof-owner-name').value.trim();
+  var achievements = document.getElementById('hof-achievements').value.trim();
+  if (!ponuName) {
+    alert("Please enter your pony’s name to proceed.");
+    return;
+  }
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🏆 Hall of Fame nomination — 2026 Year of the Horse FREE ENTRY!',
+    '',
+    '————————————————————————',
+    '🏆 HALL OF FAME NOMINATION',
+    '————————————————————————',
+    'Name: ' + ponuName,
+    'Owner/Companion: ' + (ownerName || '(not provided)'),
+    'Notable achievements / reason for consideration:',
+    achievements || '(not provided)',
+    '',
+    '————————————————————————',
+    '📌 ALSO ADD TO PONIES AROUND THE WORLD? (optional)',
+    '————————————————————————',
+    'Location (city, country):',
+    'Fun fact or description:',
+    '',
+    'Thank you! 🌈'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('Hall of Fame Nomination — ' + ponuName + ' — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+
+  var canvas = document.getElementById('hof-cert-canvas');
+  drawHOFCertificate(canvas, ponuName, ownerName);
+  var dl = document.getElementById('hof-cert-dl');
+  dl.href = canvas.toDataURL('image/png');
+  dl.download = 'ponies4life-hof-' + ponuName.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.png';
+  document.getElementById('hof-cert-result').style.display = 'block';
+  document.getElementById('hof-cert-result').scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 <script data-goatcounter="https://ponies4life.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

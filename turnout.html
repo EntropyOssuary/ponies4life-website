@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turnout — PONIES4.LIFE</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body {
+    background: radial-gradient(ellipse at 50% 80%, rgba(0,20,0,0.6) 0%, #000000 70%);
+    background-color: #000508;
+  }
+
+  .turnout-intro {
+    max-width: 560px;
+    margin: 0 auto 6px;
+    color: #aaa;
+    font-size: 0.88em;
+    line-height: 1.8;
+    font-style: italic;
+  }
+  .turnout-intro strong { color: var(--neon-lime); font-style: normal; }
+
+  /* ---- scatter board ---- */
+  .scatter-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 8px;
+    justify-content: center;
+    max-width: 720px;
+    margin: 0 auto 10px;
+    padding: 10px 0;
+  }
+
+  .link-card {
+    background: #030d03;
+    border: 2px solid var(--neon-cyan);
+    padding: 11px 14px;
+    max-width: 195px;
+    min-width: 140px;
+    text-align: left;
+    transform: rotate(-1.5deg);
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .link-card:nth-child(2n)   { transform: rotate(1.2deg);  border-color: var(--neon-pink); background: #0d0008; }
+  .link-card:nth-child(3n)   { transform: rotate(-0.5deg); border-color: var(--neon-yellow); background: #0a0a00; }
+  .link-card:nth-child(4n)   { transform: rotate(2deg);    border-color: #00ff88; background: #000d04; }
+  .link-card:nth-child(5n)   { transform: rotate(-2.2deg); border-color: #cc88ff; background: #080010; }
+  .link-card:hover {
+    transform: rotate(0deg) scale(1.04);
+    z-index: 20;
+    box-shadow: 0 0 18px currentColor;
+  }
+  .card-tag {
+    display: block;
+    font-size: 0.62em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 5px;
+  }
+  .card-name {
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    word-break: break-word;
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+  .link-card:nth-child(2n) .card-name { color: var(--neon-pink); }
+  .link-card:nth-child(3n) .card-name { color: var(--neon-yellow); }
+  .link-card:nth-child(4n) .card-name { color: #00ff88; }
+  .link-card:nth-child(5n) .card-name { color: #cc88ff; }
+  .card-name:hover { color: #fff !important; }
+  .card-note {
+    display: block;
+    font-size: 0.74em;
+    color: #666;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  /* ---- section dividers ---- */
+  .field-section {
+    margin: 24px auto 6px;
+    max-width: 720px;
+    text-align: center;
+  }
+  .field-section h2 {
+    display: inline-block;
+    font-size: 0.78em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #444;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 4px 20px;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <nav class="geocities-nav">
+    <a href="index.html">🏠 HOME</a>
+    <a href="pony-of-the-month.html">🏆 PONY OF THE MONTH</a>
+    <a href="ponies-around-the-world.html">🌍 AROUND THE WORLD</a>
+    <a href="hall-of-fame.html">🎖 HALL OF FAME</a>
+    <a href="cemetery-gate.html">🕯 MEMORIAL GARDEN</a>
+    <a href="guestbook.html">📖 GUESTBOOK</a>
+  </nav>
+
+  <div class="page-title-bar">🌿 TURNOUT 🌿</div>
+
+  <p class="turnout-intro">
+    Turnout is when you open the gate and let the horse loose in the field.<br>
+    <strong>Go graze.</strong> We'll leave the light on.
+  </p>
+
+  <hr class="rainbow-hr">
+
+  <!-- GOOD INTERNET -->
+  <div class="field-section"><h2>good internet</h2></div>
+
+  <div class="scatter-board">
+
+    <div class="link-card">
+      <span class="card-tag">essential</span>
+      <a class="card-name" href="https://www.cameronsworld.net" target="_blank" rel="noopener">cameronsworld.net</a>
+      <span class="card-note">a love letter to geocities. look at this and feel something. stay for hours.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">old web alive</span>
+      <a class="card-name" href="https://neocities.org" target="_blank" rel="noopener">neocities.org</a>
+      <span class="card-note">personal websites did not die. they live here. make one.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">search the weird</span>
+      <a class="card-name" href="https://wiby.me" target="_blank" rel="noopener">wiby.me</a>
+      <span class="card-note">a search engine for the old web. finds sites that google forgot on purpose.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">the memory</span>
+      <a class="card-name" href="https://archive.org" target="_blank" rel="noopener">archive.org</a>
+      <span class="card-note">everything that was ever on the internet lives here. everything.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">dangerous</span>
+      <a class="card-name" href="https://gifcities.org" target="_blank" rel="noopener">gifcities.org</a>
+      <span class="card-note">search the geocities gif archive. you will lose an entire afternoon. you have been warned.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">manifesto</span>
+      <a class="card-name" href="https://indieweb.org" target="_blank" rel="noopener">indieweb.org</a>
+      <span class="card-note">your website is yours. the principles behind why this site exists.</span>
+    </div>
+
+  </div>
+
+  <!-- HORSE THINGS -->
+  <div class="field-section"><h2>horse things</h2></div>
+
+  <div class="scatter-board">
+
+    <div class="link-card">
+      <span class="card-tag">we're in this</span>
+      <a class="card-name" href="https://hotlinewebring.club" target="_blank" rel="noopener">hotlinewebring.club</a>
+      <span class="card-note">the webring we're proud to be part of. click around and find good people.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">breed registry</span>
+      <a class="card-name" href="https://www.equineonline.com" target="_blank" rel="noopener">equineonline.com</a>
+      <span class="card-note">where real horses get their official papers. we find this very funny and also correct.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">truly</span>
+      <a class="card-name" href="https://www.horseandhound.co.uk" target="_blank" rel="noopener">horseandhound.co.uk</a>
+      <span class="card-note">the most british publication on earth. has been covering horses since 1884. unfazed by everything.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">important</span>
+      <a class="card-name" href="https://en.wikipedia.org/wiki/Horse" target="_blank" rel="noopener">wikipedia: horse</a>
+      <span class="card-note">did you know horses are a species. there is a wikipedia article about this.</span>
+    </div>
+
+  </div>
+
+  <!-- WEIRD CORNERS -->
+  <div class="field-section"><h2>weird corners</h2></div>
+
+  <div class="scatter-board">
+
+    <div class="link-card">
+      <span class="card-tag">the vibe</span>
+      <a class="card-name" href="https://theuselessweb.com" target="_blank" rel="noopener">theuselessweb.com</a>
+      <span class="card-note">press a button. go somewhere pointless. this is what the internet is for.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">listen</span>
+      <a class="card-name" href="https://radio.garden" target="_blank" rel="noopener">radio.garden</a>
+      <span class="card-note">a globe. click anywhere on it. hear that city's radio. feel far away.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">letters</span>
+      <a class="card-name" href="https://www.lettersofnote.com" target="_blank" rel="noopener">lettersofnote.com</a>
+      <span class="card-note">real letters from real people throughout history. some are very funny. some will ruin you.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">free time</span>
+      <a class="card-name" href="https://neal.fun" target="_blank" rel="noopener">neal.fun</a>
+      <span class="card-note">small interactive things. they are all good. the size of the universe one will stay with you.</span>
+    </div>
+
+    <div class="link-card">
+      <span class="card-tag">maps</span>
+      <a class="card-name" href="https://www.openstreetmap.org" target="_blank" rel="noopener">openstreetmap.org</a>
+      <span class="card-note">the open source map of the world. built by people who care. this site uses it.</span>
+    </div>
+
+  </div>
+
+  <hr class="rainbow-hr">
+
+  <p style="color:#333;font-size:0.72em;font-style:italic;margin:14px auto;max-width:500px;text-align:center;line-height:1.8;">
+    all links open in a new tab. none of these are sponsored. none of these people know we exist.<br>
+    <span style="color:#222;">to suggest a link: <a href="mailto:ponies@ponies4.life" style="color:#333;">ponies@ponies4.life</a></span>
+  </p>
+
+  <div class="counter-wrap">
+    <span class="counter-label">SITE VISITORS</span>
+    <span id="visitor-count">0000000</span>
+  </div>
+
+</div>
+<script src="js/main.js"></script>
+<script data-goatcounter="https://ponies4life.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
