@@ -91,6 +91,23 @@ function _seal(ctx, cx, cy, r, lineColor, fillColor) {
   ctx.fillText('OFFICIAL SEAL', cx, cy + r - 11);
 }
 
+function _sparkle(ctx, x, y, size, color) {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = size * 2;
+  ctx.beginPath();
+  for (var i = 0; i < 8; i++) {
+    var angle = (i * Math.PI) / 4;
+    var r = i % 2 === 0 ? size : size * 0.35;
+    if (i === 0) ctx.moveTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    else ctx.lineTo(x + r * Math.cos(angle), y + r * Math.sin(angle));
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
 // ---- HALL OF FAME CERTIFICATE (dark gold, hunt-club) ----
 function drawHOFCertificate(canvas, ponuName, ownerName) {
   var W = 800, H = 560;
@@ -207,116 +224,165 @@ function drawHOFCertificate(canvas, ponuName, ownerName) {
   ctx.fillText(_regNum('HOF'), W-18, H-10);
 }
 
-// ---- PONIES AROUND THE WORLD CERTIFICATE (parchment, who's-who bureaucratic) ----
+// ---- PONIES AROUND THE WORLD CERTIFICATE (dark space, globe, sparkles) ----
 function drawPATWCertificate(canvas, ponuName, ownerName, location) {
   var W = 800, H = 560;
   canvas.width = W; canvas.height = H;
   var ctx = canvas.getContext('2d');
 
-  // Parchment background
-  var bg = ctx.createLinearGradient(0, 0, W, H);
-  bg.addColorStop(0, '#f7f2e4'); bg.addColorStop(1, '#ede4c8');
+  // Deep space background
+  var bg = ctx.createRadialGradient(W/2, H/2, 80, W/2, H/2, 500);
+  bg.addColorStop(0, '#030d20'); bg.addColorStop(1, '#000508');
   ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
-  // Subtle age lines
-  ctx.fillStyle = 'rgba(139,109,56,0.025)';
-  for (var i = 0; i < W; i += 3) { ctx.fillRect(i, 0, 1, H); }
+
+  // Star field
+  var stars = [[42,38],[150,22],[310,15],[490,28],[640,18],[750,40],[780,120],
+               [770,250],[755,380],[720,490],[600,535],[460,542],[320,538],
+               [180,530],[80,510],[28,420],[20,300],[30,170],[55,220],[700,160]];
+  stars.forEach(function(s) {
+    ctx.fillStyle = 'rgba(255,255,255,' + (0.3 + Math.random() * 0.5) + ')';
+    ctx.beginPath(); ctx.arc(s[0], s[1], 0.8 + Math.random(), 0, Math.PI*2); ctx.fill();
+  });
 
   // Borders
-  ctx.strokeStyle = '#1a2844'; ctx.lineWidth = 5;
+  ctx.strokeStyle = '#00ffff'; ctx.lineWidth = 3;
   ctx.strokeRect(10, 10, W-20, H-20);
-  ctx.strokeStyle = '#2a3e6e'; ctx.lineWidth = 1;
-  ctx.strokeRect(20, 20, W-40, H-40);
-  ctx.strokeStyle = '#c8a96e'; ctx.lineWidth = 0.8;
-  ctx.strokeRect(25, 25, W-50, H-50);
+  ctx.strokeStyle = 'rgba(0,255,255,0.3)'; ctx.lineWidth = 1;
+  ctx.strokeRect(17, 17, W-34, H-34);
+  ctx.strokeStyle = '#ff00cc'; ctx.lineWidth = 0.5;
+  ctx.strokeRect(22, 22, W-44, H-44);
 
-  // Header band
-  ctx.fillStyle = '#1a2844'; ctx.fillRect(10, 10, W-20, 68);
+  // Corner stars
+  [[ 28, 28],[ W-28, 28],[ 28, H-28],[W-28, H-28]].forEach(function(p) {
+    _sparkle(ctx, p[0], p[1], 7, '#00ffff');
+  });
 
-  // Header text
   ctx.textAlign = 'center';
-  ctx.fillStyle = '#f0d88c'; ctx.font = 'bold 24px Georgia, serif';
-  ctx.fillText('PONIES AROUND THE WORLD', W/2, 43);
-  ctx.fillStyle = '#b8a870'; ctx.font = '10px Georgia, serif';
-  ctx.fillText('INTERNATIONAL EQUINE DIRECTORY & OFFICIAL REGISTRY  ·  VOLUME XII  ·  YEAR OF THE HORSE EDITION', W/2, 62);
 
-  // Verified badge in header
-  ctx.beginPath(); ctx.arc(745, 40, 18, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(240,216,140,0.15)'; ctx.fill();
-  ctx.strokeStyle = '#f0d88c'; ctx.lineWidth = 1.2; ctx.stroke();
-  ctx.fillStyle = '#f0d88c'; ctx.font = 'bold 7px Georgia, serif';
-  ctx.fillText('REGISTRY', 745, 37); ctx.font = '6.5px Georgia, serif';
-  ctx.fillText('VERIFIED', 745, 47);
+  // Title
+  ctx.fillStyle = '#00ffff'; ctx.font = 'bold 26px Georgia, serif';
+  ctx.fillText('PONIES AROUND THE WORLD', W/2, 52);
+  ctx.fillStyle = 'rgba(0,200,255,0.6)'; ctx.font = '10px Georgia, serif';
+  ctx.fillText('INTERNATIONAL EQUINE DIRECTORY & OFFICIAL REGISTRY  ·  VOLUME XII  ·  YEAR OF THE HORSE EDITION', W/2, 68);
+
+  // Globe
+  var gx = W/2, gy = 128, gr = 44;
+  // Globe glow
+  ctx.shadowColor = '#00ffff'; ctx.shadowBlur = 18;
+  ctx.beginPath(); ctx.arc(gx, gy, gr, 0, Math.PI*2);
+  var globeGrad = ctx.createRadialGradient(gx - gr*0.3, gy - gr*0.3, gr*0.05, gx, gy, gr);
+  globeGrad.addColorStop(0, '#0a3060'); globeGrad.addColorStop(1, '#010a18');
+  ctx.fillStyle = globeGrad; ctx.fill();
+  ctx.strokeStyle = '#00ffff'; ctx.lineWidth = 1.5; ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Clip to globe for grid lines
+  ctx.save();
+  ctx.beginPath(); ctx.arc(gx, gy, gr, 0, Math.PI*2); ctx.clip();
+  ctx.strokeStyle = 'rgba(0,200,255,0.28)'; ctx.lineWidth = 0.7;
+  // Latitude lines
+  [-30, 0, 30].forEach(function(deg) {
+    var latR = gr * Math.cos(deg * Math.PI / 180);
+    var latY = gy + gr * Math.sin(deg * Math.PI / 180);
+    ctx.beginPath();
+    ctx.ellipse(gx, latY, latR, latR * 0.22, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  });
+  // Longitude lines
+  [0, 45, 90, 135].forEach(function(deg) {
+    var a = deg * Math.PI / 180;
+    ctx.beginPath();
+    ctx.ellipse(gx, gy, gr * Math.abs(Math.sin(a)) + 1, gr, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  });
+  ctx.restore();
+  // Equator highlight
+  ctx.strokeStyle = 'rgba(0,255,255,0.5)'; ctx.lineWidth = 0.9;
+  ctx.save();
+  ctx.beginPath(); ctx.arc(gx, gy, gr, 0, Math.PI*2); ctx.clip();
+  ctx.beginPath(); ctx.ellipse(gx, gy, gr, gr * 0.22, 0, 0, Math.PI * 2); ctx.stroke();
+  ctx.restore();
+
+  // Sparkles around the globe
+  var sparkleData = [
+    [gx-70, gy-30, 5, '#ffff00'], [gx+72, gy-28, 4, '#ff00cc'],
+    [gx-58, gy+48, 4, '#00ffff'], [gx+60, gy+44, 5, '#ffff00'],
+    [gx-90, gy+10, 3, '#ff00cc'], [gx+90, gy+8, 3, '#00ff88'],
+    [gx+20, gy-68, 4, '#00ffff'], [gx-22, gy-66, 3, '#ff00cc'],
+    [150, 95, 3, '#ffff00'],      [650, 92, 3, '#ff00cc'],
+    [120, 145, 2, '#00ff88'],     [680, 148, 2, '#ffff00']
+  ];
+  sparkleData.forEach(function(s) { _sparkle(ctx, s[0], s[1], s[2], s[3]); });
 
   // Certify text
-  ctx.fillStyle = '#2a3e6e'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('This is to certify, attest, and confirm that the following has been duly entered into the official record:', W/2, 107);
+  _hRule(ctx, 60, 183, 740, 'rgba(0,255,255,0.3)', 1);
+  ctx.fillStyle = 'rgba(0,200,255,0.7)'; ctx.font = 'italic 12px Georgia, serif';
+  ctx.fillText('This is to certify, attest, and confirm that the following has been duly entered into the official record:', W/2, 200);
 
   // Pony name
-  ctx.fillStyle = '#0d1a33'; ctx.font = 'bold 40px Georgia, serif';
-  ctx.fillText(ponuName, W/2, 157);
+  ctx.fillStyle = '#ffff00'; ctx.font = 'bold italic 40px Georgia, serif';
+  ctx.shadowColor = '#ffff00'; ctx.shadowBlur = 12;
+  ctx.fillText(ponuName, W/2, 247);
+  ctx.shadowBlur = 0;
   var nw = ctx.measureText(ponuName).width;
-  ctx.strokeStyle = '#1a2844'; ctx.lineWidth = 1.5;
+  ctx.strokeStyle = 'rgba(255,255,0,0.5)'; ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(W/2 - nw/2 - 14, 165); ctx.lineTo(W/2 + nw/2 + 14, 165); ctx.stroke();
+  ctx.moveTo(W/2 - nw/2 - 14, 254); ctx.lineTo(W/2 + nw/2 + 14, 254); ctx.stroke();
 
-  var afterY = 185;
+  var afterY = 272;
   if (ownerName) {
-    ctx.fillStyle = '#3a4a6a'; ctx.font = 'italic 13px Georgia, serif';
+    ctx.fillStyle = 'rgba(0,200,255,0.8)'; ctx.font = 'italic 13px Georgia, serif';
     ctx.fillText('of record to ' + ownerName, W/2, afterY);
     afterY += 18;
   }
   if (location) {
-    ctx.fillStyle = '#5a3a00'; ctx.font = 'bold 14px Georgia, serif';
-    ctx.fillText('— ' + location + ' —', W/2, afterY);
+    ctx.fillStyle = '#ff00cc'; ctx.font = 'bold 13px Georgia, serif';
+    ctx.fillText('📍 ' + location, W/2, afterY);
   }
 
-  // Decorative rules
-  _hRule(ctx, 60, 217, 740, '#1a2844', 0.8);
-  _hRule(ctx, 60, 220, 740, '#c8a96e', 0.4);
+  _hRule(ctx, 60, 305, 740, 'rgba(0,255,255,0.25)', 0.8);
 
   // Bureaucratic body
-  ctx.fillStyle = '#2a2a2a'; ctx.font = '12.5px Georgia, serif';
-  _certWrap(ctx, 'is hereby officially listed, documented, and entered into the permanent record of the Ponies Around the World International Registry — the world\'s most comprehensive and authoritative directory of documented equines and equine-adjacent companions. This listing shall persist in perpetuity within the official archive, cross-referenced in the General Index, the Continental Supplement, and the Year of the Horse Special Edition.', W/2, 240, 660, 20);
+  ctx.fillStyle = 'rgba(200,230,255,0.75)'; ctx.font = '12px Georgia, serif';
+  _certWrap(ctx, 'is hereby officially listed, documented, and entered into the permanent record of the Ponies Around the World International Registry — the world\'s most comprehensive and authoritative directory of documented equines and equine-adjacent companions. This listing shall persist in perpetuity, cross-referenced in the General Index, Continental Supplement, and Year of the Horse Special Edition.', W/2, 322, 680, 19);
 
   // Year of Horse ribbon
-  ctx.fillStyle = '#1a2844'; ctx.fillRect(150, 320, 500, 26);
-  ctx.strokeStyle = '#f0d88c'; ctx.lineWidth = 1; ctx.strokeRect(150, 320, 500, 26);
-  ctx.fillStyle = '#f0d88c'; ctx.font = 'bold 11px Georgia, serif';
-  ctx.fillText('✦  INDUCTED 2026  ·  YEAR OF THE HORSE  ·  ANNO EQUI  ✦', W/2, 337);
+  ctx.strokeStyle = '#ffff00'; ctx.lineWidth = 1;
+  ctx.strokeRect(140, 382, 520, 25);
+  ctx.fillStyle = 'rgba(255,255,0,0.07)'; ctx.fillRect(140, 382, 520, 25);
+  ctx.fillStyle = '#ffff00'; ctx.font = 'bold 11px Georgia, serif';
+  ctx.fillText('✦  INDUCTED 2026  ·  YEAR OF THE HORSE  ·  ANNO EQUI  ✦', W/2, 399);
 
   // Verification box
-  ctx.strokeStyle = '#1a2844'; ctx.lineWidth = 1;
-  ctx.strokeRect(180, 356, 440, 46);
-  ctx.fillStyle = 'rgba(26,40,68,0.05)'; ctx.fillRect(180, 356, 440, 46);
-  ctx.fillStyle = '#1a2844'; ctx.font = 'bold 10px Georgia, serif';
-  ctx.fillText('VERIFIED BY THE BOARD OF DIRECTORS', W/2, 372);
-  ctx.fillStyle = '#5a5a5a'; ctx.font = 'italic 10px Georgia, serif';
-  ctx.fillText('Ponies Around the World International Registry Committee', W/2, 386);
-  ctx.font = '9px Georgia, serif';
-  ctx.fillText('Established on the Internet · Editorial decisions are final and beyond appeal · All species welcome', W/2, 398);
+  ctx.strokeStyle = 'rgba(0,255,255,0.3)'; ctx.lineWidth = 1;
+  ctx.strokeRect(185, 415, 430, 40);
+  ctx.fillStyle = '#00ffff'; ctx.font = 'bold 9px Georgia, serif';
+  ctx.fillText('VERIFIED BY THE BOARD OF DIRECTORS · PONIES AROUND THE WORLD INTERNATIONAL REGISTRY', W/2, 430);
+  ctx.fillStyle = 'rgba(0,200,255,0.5)'; ctx.font = 'italic 9px Georgia, serif';
+  ctx.fillText('Established on the Internet · Editorial decisions are final · All species welcome · Raccoons especially', W/2, 446);
 
   // Signatures
-  ctx.strokeStyle = '#9999bb'; ctx.lineWidth = 0.5;
-  ctx.beginPath(); ctx.moveTo(78, 432); ctx.lineTo(268, 432); ctx.stroke();
+  ctx.strokeStyle = 'rgba(0,255,255,0.3)'; ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(75, 470); ctx.lineTo(265, 470); ctx.stroke();
   ctx.textAlign = 'left';
-  ctx.fillStyle = '#3a4a6a'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('Sonny Wimps Gunshot', 78, 447);
-  ctx.fillStyle = '#888'; ctx.font = '9px Georgia, serif';
-  ctx.fillText('Chair, Selection Committee', 78, 459);
+  ctx.fillStyle = '#00ffcc'; ctx.font = 'italic 13px Georgia, serif';
+  ctx.fillText('Sonny Wimps Gunshot', 75, 484);
+  ctx.fillStyle = 'rgba(0,200,255,0.5)'; ctx.font = '9px Georgia, serif';
+  ctx.fillText('Chair, Selection Committee', 75, 496);
 
-  ctx.beginPath(); ctx.moveTo(532, 432); ctx.lineTo(722, 432); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(535, 470); ctx.lineTo(725, 470); ctx.stroke();
   ctx.textAlign = 'right';
-  ctx.fillStyle = '#3a4a6a'; ctx.font = 'italic 13px Georgia, serif';
-  ctx.fillText('Gryffins Sonny Mojo', 722, 447);
-  ctx.fillStyle = '#888'; ctx.font = '9px Georgia, serif';
-  ctx.fillText('Secretary, Official Records', 722, 459);
+  ctx.fillStyle = '#00ffcc'; ctx.font = 'italic 13px Georgia, serif';
+  ctx.fillText('Gryffins Sonny Mojo', 725, 484);
+  ctx.fillStyle = 'rgba(0,200,255,0.5)'; ctx.font = '9px Georgia, serif';
+  ctx.fillText('Secretary, Official Records', 725, 496);
 
   // Seal
   ctx.textAlign = 'center';
-  _seal(ctx, W/2, 484, 36, '#1a2844', 'rgba(26,40,68,0.08)');
+  _seal(ctx, W/2, 484, 36, '#00ffff', 'rgba(0,255,255,0.07)');
 
   // Registry number
-  ctx.fillStyle = '#aaaaaa'; ctx.font = '9px monospace';
+  ctx.fillStyle = 'rgba(0,200,255,0.3)'; ctx.font = '9px monospace';
   ctx.textAlign = 'right';
   ctx.fillText(_regNum('PATW') + ' · ponies4.life', W-18, H-10);
 }
