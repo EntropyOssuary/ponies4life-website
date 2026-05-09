@@ -236,9 +236,17 @@
 
   <hr class="rainbow-hr">
 
-  <p style="color:#333;font-size:0.72em;font-style:italic;margin:14px auto;max-width:500px;text-align:center;line-height:1.8;">
-    all links open in a new tab. none of these are sponsored. none of these people know we exist.<br>
-    <span style="color:#222;">to suggest a link: <a href="mailto:ponies@ponies4.life" style="color:#333;">ponies@ponies4.life</a></span>
+  <div style="background:rgba(0,20,0,0.4);border:2px solid #00ff88;padding:14px 18px;margin:12px auto;max-width:480px;">
+    <p style="color:#00ff88;font-weight:bold;margin:0 0 6px;font-size:0.95em;">📬 SUGGEST A LINK</p>
+    <p style="color:#888;font-size:0.8em;font-style:italic;line-height:1.7;margin:0 0 10px;">
+      know a good corner of the internet? your own site? a friend's?<br>
+      send it over. no guarantees. total editorial control. raccoons still welcome.
+    </p>
+    <button class="email-btn" style="background:#003300;border-color:#00ff88;color:#00ff88;" onclick="suggestLink()">📧 SUGGEST A LINK</button>
+  </div>
+
+  <p style="color:#222;font-size:0.7em;font-style:italic;margin:10px auto;max-width:500px;text-align:center;">
+    all links open in a new tab. none of these are sponsored. none of these people know we exist.
   </p>
 
   <div class="counter-wrap">
@@ -248,6 +256,29 @@
 
 </div>
 <script src="js/main.js"></script>
+<script>
+function suggestLink() {
+  var u = 'ponies', d = 'ponies4.life';
+  var body = [
+    'Hi! 🌿 I have a link suggestion for the Turnout page.',
+    '',
+    '————————————————————————',
+    '🔗 LINK SUGGESTION',
+    '————————————————————————',
+    'URL:',
+    'Site name:',
+    'Why it belongs here (one sentence is fine):',
+    '',
+    '————————————————————————',
+    'Is this your own site? (yes / no):',
+    '',
+    'Thank you! 🌈'
+  ].join('\n');
+  window.location.href = 'mailto:' + u + '@' + d
+    + '?subject=' + encodeURIComponent('Turnout link suggestion — Ponies4.life')
+    + '&body=' + encodeURIComponent(body);
+}
+</script>
 <script data-goatcounter="https://ponies4life.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
