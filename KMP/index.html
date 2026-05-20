@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Griffin — 3-Week Jumping Programme</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #0F6E56;
+    --amber-light: #FAEEDA;
+    --amber-dark: #854F0B;
+    --blue-light: #E6F1FB;
+    --blue-dark: #185FA5;
+    --border: rgba(0,0,0,0.1);
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --bg: #f8f7f4;
+    --card: #ffffff;
+    --card-inner: #f8f7f4;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em { font-style: italic; color: var(--green-dark); }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+  }
+
+  .horse-note {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 2rem;
+    font-size: 13px;
+    color: var(--green-dark);
+    line-height: 1.6;
+  }
+
+  .horse-note strong { font-weight: 500; }
+
+  .week-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+    padding-left: 2px;
+  }
+
+  .day-card {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--card-inner);
+  }
+
+  .day-pill {
+    font-size: 10px;
+    font-weight: 500;
+    background: var(--green-light);
+    color: var(--green-dark);
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .day-focus {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-left: auto;
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .day-body { padding: 1.1rem 1.25rem; }
+
+  .exercise { display: flex; gap: 12px; margin-bottom: 1rem; }
+  .exercise:last-child { margin-bottom: 0; }
+
+  .ex-num {
+    width: 22px; height: 22px; min-width: 22px;
+    border-radius: 50%;
+    background: var(--card-inner);
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 500;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+
+  .ex-content { flex: 1; }
+
+  .ex-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .ex-detail {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .dist-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: var(--amber-light);
+    color: var(--amber-dark);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin: 1px 2px;
+  }
+
+  .coach-note {
+    margin-top: 7px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-style: italic;
+    border-left: 2px solid var(--border);
+    padding-left: 8px;
+    line-height: 1.55;
+  }
+
+  .rhythm-note {
+    margin-top: 7px;
+    font-size: 12px;
+    color: var(--green-dark);
+    font-style: italic;
+    border-left: 2px solid var(--green);
+    background: var(--green-light);
+    border-radius: 0 4px 4px 0;
+    padding: 5px 9px;
+    line-height: 1.55;
+  }
+
+  .walk-note {
+    margin: 0.75rem 0 0.25rem;
+    font-size: 11px;
+    color: var(--blue-dark);
+    border-left: 2px solid #378ADD;
+    background: var(--blue-light);
+    border-radius: 0 4px 4px 0;
+    padding: 5px 9px;
+    font-style: italic;
+  }
+
+  .divider {
+    height: 0.5px;
+    background: var(--border);
+    margin: 1rem 0;
+  }
+
+  .course-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: var(--card-inner);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    border: 0.5px solid var(--border);
+  }
+
+  .course-box strong { color: var(--text); font-weight: 500; }
+
+  .weeks-placeholder {
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.25rem;
+    border: 0.5px dashed var(--border);
+    border-radius: 12px;
+    background: var(--card-inner);
+  }
+
+  .weeks-placeholder .label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 5px;
+  }
+
+  .weeks-placeholder p {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  .video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 7px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green-dark);
+    background: var(--green-light);
+    border: 0.5px solid var(--green);
+    border-radius: 4px;
+    padding: 3px 9px;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s;
+  }
+  .video-link:hover { opacity: 0.75; }
+  .video-link svg { flex-shrink: 0; }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; }
+    .day-focus { display: none; }
+    .day-header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">3-Week Programme</div>
+    <h1>Griffin &amp; Dana<br><em>Introduction to Jumping</em></h1>
+    <p class="subtitle">Coach: Kirstin &nbsp;·&nbsp; Location: New York (indoors)</p>
+  </header>
+
+  <div class="horse-note">
+    <strong>Horse notes:</strong> Griffin may have a slightly shorter stride. Working indoors also compresses distances slightly — adjust spacing as needed and monitor rhythm throughout. All distances listed in metres and feet.
+  </div>
+
+  <div class="week-label">Week 1 — Introduction to jumping</div>
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-pill">Day 1</div>
+      <div class="day-title">Building patience &amp; rhythm</div>
+      <div class="day-focus">Foundation session</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise">
+        <div class="ex-num">1</div>
+        <div class="ex-content">
+          <div class="ex-title">Trot the vertical</div>
+          <div class="ex-detail">Place a placing pole on the approach at <span class="dist-tag">2.5m / 8'2"</span> in front of the vertical. Trot in quietly, letting the placing pole set up the take-off spot. Keep the jump small — focus is patience and a correct, balanced approach.</div>
+          <div class="rhythm-note">Say out loud "one, two" every time you sit in the saddle during the trot approach. This keeps both you and Griffin focused on a consistent beat — if you lose the rhythm in your voice, you've lost it in your riding.</div>
+          <div class="coach-note">This exercise anchors every session. It teaches Griffin to sit on his hindquarters and wait rather than rushing or flattening.</div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=33nl-dFYX2s" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch: Trotting the vertical</a>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">2</div>
+        <div class="ex-content">
+          <div class="ex-title">Canter poles on a circle</div>
+          <div class="ex-detail">Set two canter poles evenly spaced on a large circle. Ride a balanced canter, counting the strides out loud and trying to hear the next stride coming. Griffin is your dance partner — you need to listen to each other to dance in step.</div>
+          <div class="coach-note">Encourages straightness, rhythm, and rider awareness of stride length on a curve.</div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=ATvw5gFKm8c" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch: Improve your rounds with the circle jump exercise</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-pill">Day 2</div>
+      <div class="day-title">Adding a landing rail &amp; second jump</div>
+      <div class="day-focus">Introduce distance awareness</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise">
+        <div class="ex-num">1</div>
+        <div class="ex-content">
+          <div class="ex-title">Trot the vertical (warm-up)</div>
+          <div class="ex-detail">Repeat the placing pole trot exercise from Day 1. <span class="dist-tag">2.5m / 8'2"</span> approach pole. Establish the same quiet, patient rhythm — say "one, two" out loud to maintain the beat — before progressing.</div>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">2</div>
+        <div class="ex-content">
+          <div class="ex-title">Vertical → landing rail → second jump</div>
+          <div class="ex-detail">From the trot vertical, add a rail on the ground on landing at <span class="dist-tag">3m / 9'10"</span>, followed by a second jump at <span class="dist-tag">3m / 9'10"</span> from the rail. The landing rail is there to regulate the stride — it stops Griffin zooming off or flattening after the first fence and keeps him thinking forward in a controlled, measured way.</div>
+          <div class="coach-note">Keep both jumps small initially. The goal is rhythm and connection between fences, not height.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-pill">Day 3</div>
+      <div class="day-title">Introducing the bounce grid</div>
+      <div class="day-focus">Engagement &amp; collection</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise">
+        <div class="ex-num">1</div>
+        <div class="ex-content">
+          <div class="ex-title">Trot the vertical (warm-up)</div>
+          <div class="ex-detail">Always start here — builds patience and hindquarter engagement before grid work. Say "one, two" on the approach to set the rhythm.</div>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">2</div>
+        <div class="ex-content">
+          <div class="ex-title">Grid: vertical → bounce → rail on ground</div>
+          <div class="ex-detail">Build progressively: trot vertical, then add a bounce, then add a rail on the ground at <span class="dist-tag">3m / 9'10"</span> after the bounce. Ride this combination approximately 8 times. Gradually raise the second jump (after the bounce) but keep the first jump smaller to maintain a soft, easy entry into the grid.</div>
+          <div class="coach-note">Indoors and with Griffin's shorter stride in mind — don't rush the height increases. Quality of footfall and rhythm is the priority.</div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=9DoeOLbRApc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch: Improve your horse's jumping style with a bounce grid</a>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">3</div>
+        <div class="ex-content">
+          <div class="ex-title">Canter poles on a straight line</div>
+          <div class="ex-detail">Finish with canter poles on a straight line. Focus on keeping Griffin listening to a steady, consistent beat — count the strides out loud and try to feel the rhythm beneath you. Think of it as keeping the dance going, just on a straight line now.</div>
+          <div class="coach-note">A calm, rhythmical finish rewards the effort of the grid work and reinforces the connection built through the session.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-pill">Day 4</div>
+      <div class="day-title">Triple bounce — sustained effort</div>
+      <div class="day-focus">Strength &amp; engagement</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise">
+        <div class="ex-num">1</div>
+        <div class="ex-content">
+          <div class="ex-title">Trot the vertical (warm-up)</div>
+          <div class="ex-detail">Same as every session — patient trot approach, placing pole at <span class="dist-tag">2.5m / 8'2"</span>. Say "one, two" on the approach.</div>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">2</div>
+        <div class="ex-content">
+          <div class="ex-title">Triple bounce grid</div>
+          <div class="ex-detail">Evolve Day 3's grid by replacing the landing rail with a third bounce. Three bounces in succession creates sustained physical effort — do not increase height. The three-element combination demands more from Griffin physically and mentally than height alone.</div>
+          <div class="coach-note">Three bounces = sustained engagement. Bigger is not better here — the effort is already significant. Keep everything small and correct.</div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=9DoeOLbRApc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch: Improve your horse's jumping style with a bounce grid</a>
+          <a class="video-link" href="https://www.youtube.com/watch?v=kLixlM8tqhE" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch: How bounces and oxers improve your horse's style</a>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">3</div>
+        <div class="ex-content">
+          <div class="ex-title">Small jumps on a circle — set on the centreline</div>
+          <div class="ex-detail">Replace the canter poles on a circle with small jumps. Set these on the <strong>centreline rather than the outside track</strong> — this forces you to ride the corners actively and build the last few straight strides into each fence correctly.</div>
+          <div class="coach-note">Riding the corners well is a skill in itself. The centreline placement means you can't rely on the track to guide you — you must steer.</div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=ATvw5gFKm8c" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch: Improve your rounds with the circle jump exercise</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-pill">Day 5</div>
+      <div class="day-title">Grid into short course — figure-8</div>
+      <div class="day-focus">Putting it all together</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise">
+        <div class="ex-num">1</div>
+        <div class="ex-content">
+          <div class="ex-title">Trot the vertical (warm-up)</div>
+          <div class="ex-detail">As always — patient, quiet trot with placing pole at <span class="dist-tag">2.5m / 8'2"</span>. Say "one, two" to establish the rhythm before every approach.</div>
+        </div>
+      </div>
+      <div class="walk-note">Between exercises — let Griffin walk and stretch on a long rein before moving on.</div>
+      <div class="divider"></div>
+      <div class="exercise">
+        <div class="ex-num">2</div>
+        <div class="ex-content">
+          <div class="ex-title">Grid into short course — figure-8 layout</div>
+          <div class="ex-detail">Build from the grid into a short course using the figure-8 arena layout:</div>
+          <div class="course-box">
+            <div><strong>Left loop —</strong> Trot poles / cavaletti (drill) into an angled ground pole (bump)</div>
+            <div><strong>Right straight line —</strong> Jump → 2 strides → 3ft jump → rail on ground <span class="dist-tag">8'2" / 2.5m</span> spacing (combination line)</div>
+            <div><strong>Bottom loop —</strong> Single jump</div>
+          </div>
+          <div class="coach-note">This session ties together everything from the week — patience off the approach, distance awareness, rhythm through combinations, and confident forward riding.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weeks-placeholder">
+    <div class="label">Weeks 2 &amp; 3</div>
+    <p>To be added — coming soon.</p>
+  </div>
+
+  <footer>
+    <p>Griffin — 3-Week Jumping Programme &nbsp;·&nbsp; Coach Kirstin</p>
+  </footer>
+
+</div>
+</body>
+</html>
