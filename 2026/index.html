@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Season</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f7f4;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1D9E75;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em { font-style: italic; color: #0F6E56; }
+
+  .month-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 1.75rem 0 0.6rem;
+    padding-left: 2px;
+  }
+
+  .event {
+    background: #fff;
+    border: 0.5px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1.1rem;
+    margin-bottom: 0.6rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .event-date {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    white-space: nowrap;
+    min-width: 68px;
+    padding-top: 2px;
+  }
+
+  .event-name {
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.5;
+  }
+
+  .event-location {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  .event.registered {
+    border-color: #f59e0b;
+    background: #fffbf0;
+  }
+
+  .event.registered .event-name {
+    color: #b45309;
+    font-weight: 500;
+  }
+
+  .registered-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: #b45309;
+    background: #fde68a;
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-left: 6px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Dana &amp; Griffin</div>
+    <h1><em>2026</em> Season</h1>
+  </header>
+
+  <div class="month-label">May</div>
+
+  <div class="event">
+    <div class="event-date">Sun May 24</div>
+    <div>
+      <div class="event-name">Larkin Hill Dressage &amp; CT Schooling Show</div>
+    </div>
+  </div>
+
+  <div class="month-label">June</div>
+
+  <div class="event">
+    <div class="event-date">Sat Jun 6</div>
+    <div>
+      <div class="event-name">Locust Hill Spring Schooling Hunter Pace</div>
+      <div class="event-location">Carlette Farm, Hyde Park, NY</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Jun 7 · 9am</div>
+    <div>
+      <div class="event-name">ENYDCTA Schooling Show #1 at Winterwood Farm</div>
+      <div class="event-location">Ballston Spa, NY</div>
+    </div>
+  </div>
+
+  <div class="event registered">
+    <div class="event-date">Sat Jun 14</div>
+    <div>
+      <div class="event-name">Intro to Fox Hunting Mounted Clinic <span class="registered-tag">Registered</span></div>
+      <div class="event-location">Old Chatham, NY</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sat Jun 14</div>
+    <div>
+      <div class="event-name">Landsmankill Trail Association Spring Trail Ride</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Jun 15</div>
+    <div>
+      <div class="event-name">Goldens Bridge Hounds Spring Hunter Pace</div>
+      <div class="event-location">Amenia, NY</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sat Jun 27</div>
+    <div>
+      <div class="event-name">Millcreek Farm Obstacle Competition</div>
+    </div>
+  </div>
+
+  <div class="event registered">
+    <div class="event-date">Mon Jun 29</div>
+    <div>
+      <div class="event-name">ENYDCTA Cross-Country Clinic with Marcia Kulak <span class="registered-tag">Registered</span></div>
+      <div class="event-location">Larkin Hill Farm</div>
+    </div>
+  </div>
+
+  <div class="month-label">July</div>
+
+  <div class="event">
+    <div class="event-date">Sun Jul 5</div>
+    <div>
+      <div class="event-name">XC Schooling Clinic with Margie Hutchinson</div>
+      <div class="event-location">Benefit for Old Chatham Pony Club</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sat Jul 18</div>
+    <div>
+      <div class="event-name">Millcreek Farm Obstacle Competition</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Fri Jul 31 · 5:30pm</div>
+    <div>
+      <div class="event-name">OCHC Trail Ride Series at Jack's Field</div>
+      <div class="event-location">Valatie, NY</div>
+    </div>
+  </div>
+
+  <div class="month-label">August</div>
+
+  <div class="event">
+    <div class="event-date">Sat Aug 22</div>
+    <div>
+      <div class="event-name">Millcreek Farm Obstacle Competition</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Aug 23 · 11am</div>
+    <div>
+      <div class="event-name">OCHC Trail Ride Series at Day Family Farm</div>
+      <div class="event-location">Old Chatham, NY</div>
+    </div>
+  </div>
+
+  <div class="event registered">
+    <div class="event-date">Fri Aug 28–Mon 31</div>
+    <div>
+      <div class="event-name">Possum Lodge Otter Creek Trip <span class="registered-tag">Registered</span></div>
+      <div class="event-location">Otter Creek, Lowville, NY</div>
+    </div>
+  </div>
+
+  <div class="month-label">September</div>
+
+  <div class="event">
+    <div class="event-date">Sun Sep 13</div>
+    <div>
+      <div class="event-name">Old Chatham Hunt Club Fall Hunter Pace</div>
+      <div class="event-location">Good Hope Farm, Malden Bridge, NY</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Sep 27</div>
+    <div>
+      <div class="event-name">Wethersfield Hunter Pace</div>
+      <div class="event-location">Amenia, NY</div>
+    </div>
+  </div>
+
+  <div class="month-label">October</div>
+
+  <div class="event">
+    <div class="event-date">Sun Oct 11</div>
+    <div>
+      <div class="event-name">Larkin Hill Dressage &amp; CT Schooling Show</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Oct 11</div>
+    <div>
+      <div class="event-name">Landsmankill Trail Association Fall Hunter Pace</div>
+      <div class="event-location">Rhinebeck, NY</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sat Oct 17</div>
+    <div>
+      <div class="event-name">Millcreek Farm Obstacle Competition</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Oct 18</div>
+    <div>
+      <div class="event-name">Millbrook Pony Club Fall Hunter Pace</div>
+      <div class="event-location">Wethersfield Farm, Amenia, NY</div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-date">Sun Oct 25</div>
+    <div>
+      <div class="event-name">Goldens Bridge Hounds Fall Hunter Pace</div>
+      <div class="event-location">Salt Point, NY</div>
+    </div>
+  </div>
+
+  <div class="month-label">November</div>
+
+  <div class="event">
+    <div class="event-date">Sun Nov 1</div>
+    <div>
+      <div class="event-name">Locust Hill Fall Hunter Pace</div>
+      <div class="event-location">Carlette Farm, Hyde Park, NY</div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/" style="cursor:default;display:inline-block;margin-top:1.5rem;"><img src="../Griffin-Logo-Transparent-Free-PNG.png" alt="" style="width:40px;height:auto;opacity:0.5;"></a>
+  </footer>
+
+</div>
+</body>
+</html>
