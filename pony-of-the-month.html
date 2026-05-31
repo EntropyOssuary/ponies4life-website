@@ -52,9 +52,25 @@
     display: inline-block;
     margin: 12px;
   }
+  .fireworks-left, .fireworks-right {
+    position: fixed;
+    top: 0;
+    width: 220px;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .fireworks-left { left: 0; }
+  .fireworks-right { right: 0; }
+  .page-wrap { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+
+<dotlottie-wc class="fireworks-left" src="Fireworks.lottie" autoplay loop></dotlottie-wc>
+<dotlottie-wc class="fireworks-right" src="Fireworks.lottie" autoplay loop></dotlottie-wc>
+
 <!-- Autoplay popup -->
 <div id="autoplay-overlay" class="win95-overlay">
   <div class="win95-popup">
@@ -94,29 +110,25 @@
   <p class="blink sparkle-text">⭐ THE RESULTS ARE IN ⭐</p>
 
   <p class="potm-name">GRYFFIN</p>
-  <p class="potm-tagline">This Month's Champion.</p>
+  <p class="potm-tagline">Two-Time Champion. Barrel Jumping Extraordinaire.</p>
 
   <!-- Gilded frame with ribbon -->
   <div class="potm-hero">
-    <!-- Blue ribbon SVG -->
-    <div class="blue-ribbon">
-      <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg">
-        <!-- ribbon circle top -->
-        <circle cx="40" cy="28" r="22" fill="#1a44cc" stroke="#0022aa" stroke-width="2"/>
-        <circle cx="40" cy="28" r="16" fill="none" stroke="#4477ff" stroke-width="1.5" opacity="0.6"/>
-        <text x="40" y="23" text-anchor="middle" font-size="7" font-family="Georgia,serif" fill="#ffd700" font-weight="bold">1ST</text>
-        <text x="40" y="34" text-anchor="middle" font-size="5.5" font-family="Georgia,serif" fill="#ffd700">PLACE</text>
-        <!-- ribbon tails -->
-        <path d="M28,48 L22,90 L40,78 L58,90 L52,48 Z" fill="#1a44cc" stroke="#0022aa" stroke-width="1.5"/>
-        <line x1="40" y1="50" x2="40" y2="78" stroke="#4477ff" stroke-width="1" opacity="0.5"/>
-        <path d="M22,90 L40,80 L40,90 L30,100Z" fill="#0d33aa"/>
-        <path d="M58,90 L40,80 L40,90 L50,100Z" fill="#0d33aa"/>
-      </svg>
-    </div>
-
     <div class="gilded-frame">
-      <!-- Using first photo as the featured Gryffin photo -->
-      <img src="photos/11E3AF81-EDF8-440C-A29D-C3E943CB1F1E_1_105_c.jpeg" alt="Gryffin — Pony of the Month">
+      <!-- Blue ribbon SVG -->
+      <div class="blue-ribbon" style="position:absolute;top:10px;left:-50px;transform:rotate(-20deg);z-index:10;width:130px;height:165px;">
+        <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg" width="130" height="165">
+          <circle cx="40" cy="28" r="22" fill="#1a44cc" stroke="#0022aa" stroke-width="2"/>
+          <circle cx="40" cy="28" r="16" fill="none" stroke="#4477ff" stroke-width="1.5" opacity="0.6"/>
+          <text x="40" y="23" text-anchor="middle" font-size="7" font-family="Georgia,serif" fill="#ffd700" font-weight="bold">1ST</text>
+          <text x="40" y="34" text-anchor="middle" font-size="5.5" font-family="Georgia,serif" fill="#ffd700">PLACE</text>
+          <path d="M28,48 L22,90 L40,78 L58,90 L52,48 Z" fill="#1a44cc" stroke="#0022aa" stroke-width="1.5"/>
+          <line x1="40" y1="50" x2="40" y2="78" stroke="#4477ff" stroke-width="1" opacity="0.5"/>
+          <path d="M22,90 L40,80 L40,90 L30,100Z" fill="#0d33aa"/>
+          <path d="M58,90 L40,80 L40,90 L50,100Z" fill="#0d33aa"/>
+        </svg>
+      </div>
+      <img src="photos/GryffinJune.jpeg" alt="Gryffin — Pony of the Month June 2026">
     </div>
     <div class="ribbon-label">★ PONY OF THE MONTH ★</div>
   </div>
@@ -125,7 +137,7 @@
 
   <div style="background:rgba(0,0,80,0.5);border:2px solid var(--neon-cyan);padding:14px;margin:12px auto;max-width:500px;">
     <p style="color:#ccc;font-size:0.85em;font-style:italic;margin:0;">
-      I did not dump my mom when a pheasant jumped out of a wormhole in the hay field and she was just riding in a bareback pad. That is why I am pony of the month for May 2026.
+      First I did not dump my mom when a pheasant jumped out of a wormhole in the hay field. And THEN — as if that was not enough — I jumped the barrels. So fancy. Each one. In a row. With my tiny perfect legs. Judges were speechless. Cameras could barely contain it. Some say the barrels have never recovered. That is why I am Pony of the Month for June 2026. Again. You are welcome.
     </p>
   </div>
 

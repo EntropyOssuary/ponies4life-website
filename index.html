@@ -14,9 +14,23 @@
   .geocities-badge { display: inline-block; background: #000; border: 2px outset #888; padding: 4px 8px; font-size: 0.7em; color: #aaa; margin: 4px; }
   .construction { animation: blink 0.5s step-start infinite; color: var(--neon-yellow); font-size: 1.3em; }
   .pony-emoji-row { font-size: 2em; letter-spacing: 8px; margin: 10px 0; }
+  .stars-left, .stars-right {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stars-left { left: 0; }
+  .stars-right { right: 0; }
+  .page-wrap { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+<dotlottie-wc class="stars-left" src="BluePurpleStars.lottie" autoplay loop></dotlottie-wc>
+<dotlottie-wc class="stars-right" src="BluePurpleStars.lottie" autoplay loop></dotlottie-wc>
 <div class="page-wrap">
 
   <div class="page-title-bar">✨ WELCOME TO PONIES4.LIFE ✨</div>
@@ -29,7 +43,11 @@
 
   <div class="site-logo"><span class="rainbow">PONIES4.LIFE</span></div>
 
-  <iframe src="https://lottie.host/embed/f0b65f3a-a49e-481d-b36a-5416dd297e69/0W9RLua3p2.lottie" style="width:280px;height:280px;border:none;background:transparent;display:block;margin:0 auto;"></iframe>
+  <div style="display:flex;align-items:center;justify-content:center;gap:0;">
+    <dotlottie-wc src="BluePurpleStars.lottie" autoplay loop style="width:180px;height:280px;pointer-events:none;"></dotlottie-wc>
+    <iframe src="https://lottie.host/embed/f0b65f3a-a49e-481d-b36a-5416dd297e69/0W9RLua3p2.lottie" style="width:280px;height:280px;border:none;background:transparent;display:block;flex-shrink:0;"></iframe>
+    <dotlottie-wc src="BluePurpleStars.lottie" autoplay loop style="width:180px;height:280px;pointer-events:none;"></dotlottie-wc>
+  </div>
 
   <hr class="rainbow-hr">
 

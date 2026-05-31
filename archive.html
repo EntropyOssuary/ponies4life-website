@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pony of the Month Archive — PONIES4.LIFE</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 92vw; max-height: 92vh; border: 3px solid var(--neon-yellow); box-shadow: 0 0 40px var(--neon-yellow); }
+</style>
 </head>
 <body>
 <div class="page-wrap">
@@ -31,6 +45,7 @@
       <tr>
         <th>Month</th>
         <th>Year</th>
+        <th>Photo</th>
         <th>Winner</th>
         <th>Notes</th>
       </tr>
@@ -39,6 +54,10 @@
   </table>
 
   <p style="color:#555;font-size:0.8em;font-style:italic;">Archive grows automatically each month. No human intervention required.</p>
+
+  <div id="lightbox" onclick="this.classList.remove('open')">
+    <img id="lightbox-img" src="" alt="">
+  </div>
 
   <div class="counter-wrap">
     <span class="counter-label">SITE VISITORS</span>
@@ -53,22 +72,18 @@
                 'July','August','September','October','November','December'];
   var start = new Date(2026, 4, 1); // May 2026
   var now = new Date();
-  var rows = [];
-  var d = new Date(start);
-  while (d <= now) {
-    rows.push({
-      month: months[d.getMonth()],
-      year: d.getFullYear(),
-      winner: 'Gryffin',
-      notes: d.getMonth() === 4 && d.getFullYear() === 2026
-        ? 'Inaugural Winner'
-        : ''
-    });
-    d.setMonth(d.getMonth() + 1);
-  }
+  var winners = [
+    { month: 4, year: 2026, winner: 'Gryffin', photo: 'photos/11E3AF81-EDF8-440C-A29D-C3E943CB1F1E_1_105_c.jpeg', notes: 'Inaugural Winner — survived the pheasant incident' },
+    { month: 5, year: 2026, winner: 'Gryffin', photo: 'photos/GryffinJune.jpeg', notes: 'Jumped the barrels SO fancy. Two-peat.' }
+  ];
+  var rows = winners.filter(function(w) {
+    var d = new Date(w.year, w.month, 1);
+    return d <= now;
+  });
   var tbody = document.getElementById('archive-body');
   tbody.innerHTML = rows.map(function(r) {
-    return '<tr><td>' + r.month + '</td><td>' + r.year + '</td>' +
+    return '<tr><td>' + months[r.month] + '</td><td>' + r.year + '</td>' +
+           '<td><img src="' + r.photo + '" alt="' + r.winner + '" onclick="document.getElementById(\'lightbox-img\').src=this.src;document.getElementById(\'lightbox\').classList.add(\'open\')" style="width:120px;height:120px;object-fit:cover;border:2px solid var(--neon-yellow);display:block;cursor:pointer;"></td>' +
            '<td style="color:var(--neon-yellow);font-weight:bold">' + r.winner + '</td>' +
            '<td style="color:#aaa;font-style:italic">' + r.notes + '</td></tr>';
   }).join('');

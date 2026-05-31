@@ -194,6 +194,7 @@ nav.geocities-nav a:hover {
 .gilded-frame {
   display: inline-block;
   position: relative;
+  overflow: visible;
   padding: 18px;
   background: linear-gradient(135deg,
     #b8860b 0%, #ffd700 15%, #fffacd 30%,
@@ -226,12 +227,12 @@ nav.geocities-nav a:hover {
 /* ---- BLUE RIBBON ---- */
 .blue-ribbon {
   position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 8px;
+  left: -40px;
+  transform: rotate(-20deg);
   z-index: 10;
 }
-.blue-ribbon svg { width: 80px; height: 100px; }
+.blue-ribbon svg { width: 130px; height: 165px; }
 
 /* ---- GRAVESTONE ---- */
 .gravestone-grid {
