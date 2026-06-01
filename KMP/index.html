@@ -280,6 +280,71 @@
     letter-spacing: 0.04em;
   }
 
+  /* Tabs */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 2rem;
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .tab-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: none;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active {
+    color: var(--green-dark);
+    border-bottom-color: var(--green);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Reference page */
+  .ref-section {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ref-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .ref-section p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .ref-section img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    border: 0.5px solid var(--border);
+  }
+
   @media (max-width: 600px) {
     h1 { font-size: 30px; }
     .day-focus { display: none; }
@@ -295,6 +360,13 @@
     <h1>Griffin &amp; Dana<br><em>Introduction to Jumping</em></h1>
     <p class="subtitle">Coach: Kirstin &nbsp;·&nbsp; Location: New York (indoors)</p>
   </header>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('plan', this)">Training Plan</button>
+    <button class="tab-btn" onclick="showTab('reference', this)">Distance Reference</button>
+  </div>
+
+  <div id="tab-plan" class="tab-panel active">
 
   <div class="horse-note">
     <strong>Horse notes:</strong> Griffin may have a slightly shorter stride. Working indoors also compresses distances slightly — adjust spacing as needed and monitor rhythm throughout. All distances listed in metres and feet.
@@ -490,6 +562,38 @@
     <a href="/" style="cursor:default;display:inline-block;margin-top:1.5rem;"><img src="../Griffin-Logo-Transparent-Free-PNG.png" alt="" style="width:40px;height:auto;opacity:0.5;"></a>
   </footer>
 
+  </div><!-- /tab-plan -->
+
+  <div id="tab-reference" class="tab-panel">
+
+    <div class="ref-section">
+      <h2>Ground Poles &amp; Cavaletti Distances</h2>
+      <p>Distances for walk, trot, and canter poles, plus raised cavaletti. Pony column applies to Griffin. Adjust ±4–6 inches as needed based on rhythm.</p>
+      <img src="../groundpole_cavalettidistances.png" alt="Ground poles and cavaletti distance guide">
+    </div>
+
+    <div class="ref-section">
+      <h2>Jump Stride Distances</h2>
+      <p>Standard distances for bounces and strided combinations with raised jumps. Pony stride is 9 ft; horse stride is 12 ft. Indoors, compress slightly and monitor rhythm.</p>
+      <img src="../Jump Stride Distances.png" alt="Jump stride distance table">
+    </div>
+
+    <footer>
+      <p>Griffin — 3-Week Jumping Programme &nbsp;·&nbsp; Coach Kirstin</p>
+      <a href="/" style="cursor:default;display:inline-block;margin-top:1.5rem;"><img src="../Griffin-Logo-Transparent-Free-PNG.png" alt="" style="width:40px;height:auto;opacity:0.5;"></a>
+    </footer>
+
+  </div><!-- /tab-reference -->
+
 </div>
+
+<script>
+  function showTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
 </body>
 </html>
