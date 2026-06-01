@@ -345,6 +345,39 @@
     border: 0.5px solid var(--border);
   }
 
+  /* Links tab */
+  .link-card {
+    display: block;
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .link-card:hover {
+    border-color: var(--green);
+    background: var(--green-light);
+  }
+
+  .link-card .link-source {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+
+  .link-card .link-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
   @media (max-width: 600px) {
     h1 { font-size: 30px; }
     .day-focus { display: none; }
@@ -364,6 +397,7 @@
   <div class="tab-bar">
     <button class="tab-btn active" onclick="showTab('plan', this)">Training Plan</button>
     <button class="tab-btn" onclick="showTab('reference', this)">Distance Reference</button>
+    <button class="tab-btn" onclick="showTab('links', this)">Training Links</button>
   </div>
 
   <div id="tab-plan" class="tab-panel active">
@@ -584,6 +618,45 @@
     </footer>
 
   </div><!-- /tab-reference -->
+
+  <div id="tab-links" class="tab-panel">
+
+    <a class="link-card" href="https://www.yourhorse.co.uk/horse-riding-training/gymnastic-cavaletti-exercises/" target="_blank" rel="noopener">
+      <div class="link-source">Your Horse</div>
+      <div class="link-title">Gymnastic Cavaletti Exercises</div>
+    </a>
+
+    <a class="link-card" href="https://useventing.com/news-media/news/understanding-gridwork-and-its-purpose-with-ecp-level-v-certified-coach-sharon-white" target="_blank" rel="noopener">
+      <div class="link-source">US Eventing</div>
+      <div class="link-title">Understanding Gridwork and Its Purpose — with ECP Level V Certified Coach Sharon White</div>
+    </a>
+
+    <a class="link-card" href="https://useventing.com/news-media/news/utilizing-pole-work-for-the-riders-development" target="_blank" rel="noopener">
+      <div class="link-source">US Eventing</div>
+      <div class="link-title">Utilizing Pole Work for the Rider's Development</div>
+    </a>
+
+    <a class="link-card" href="https://practicalhorseman.com/tag/gymnastic-exercise/" target="_blank" rel="noopener">
+      <div class="link-source">Practical Horseman</div>
+      <div class="link-title">Gymnastic Exercise — Article Archive</div>
+    </a>
+
+    <a class="link-card" href="https://www.youtube.com/@KirstinKellyEquestrian" target="_blank" rel="noopener">
+      <div class="link-source">YouTube</div>
+      <div class="link-title">Kirstin Kelly Equestrian — YouTube Channel</div>
+    </a>
+
+    <a class="link-card" href="https://kirstinkellyequestrian.com/videos/" target="_blank" rel="noopener">
+      <div class="link-source">Kirstin Kelly Equestrian</div>
+      <div class="link-title">Video Library</div>
+    </a>
+
+    <footer>
+      <p>Griffin — 3-Week Jumping Programme &nbsp;·&nbsp; Coach Kirstin</p>
+      <a href="/" style="cursor:default;display:inline-block;margin-top:1.5rem;"><img src="../Griffin-Logo-Transparent-Free-PNG.png" alt="" style="width:40px;height:auto;opacity:0.5;"></a>
+    </footer>
+
+  </div><!-- /tab-links -->
 
 </div>
 
