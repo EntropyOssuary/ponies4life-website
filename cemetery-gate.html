@@ -47,17 +47,34 @@
   .gate-scene {
     position: relative;
     width: min(480px, 90vw);
+    aspect-ratio: 474 / 255;
     margin: 0 auto;
     z-index: 3;
+    perspective: 1200px;
   }
-  .gate-img {
-    position: relative;
-    z-index: 2;
+  .gate-half {
+    position: absolute;
+    top: 0;
     width: 100%;
+    height: 100%;
+    z-index: 2;
     filter: invert(1) brightness(0.5) hue-rotate(200deg) saturate(0.6);
     opacity: 0.78;
     display: block;
+    transition: transform 1.1s ease-in;
   }
+  .gate-left {
+    left: 0;
+    clip-path: inset(0 50% 0 0);
+    transform-origin: 0% center;
+  }
+  .gate-right {
+    left: 0;
+    clip-path: inset(0 0 0 50%);
+    transform-origin: 100% center;
+  }
+  .gate-scene.open .gate-left { transform: rotateY(-100deg); }
+  .gate-scene.open .gate-right { transform: rotateY(100deg); }
 
   .enter-btn {
     background: #0a0a0a;
@@ -121,11 +138,12 @@
 
 <p class="gate-title">The Heart Horse Memorial Garden</p>
 
-<div class="gate-scene">
-  <img src="cemetery-gate-1.png" alt="Cemetery Gate" class="gate-img flicker">
+<div class="gate-scene" id="gate-scene">
+  <img src="cemetery-gate-1.png" alt="Cemetery Gate" class="gate-half gate-left flicker">
+  <img src="cemetery-gate-1.png" alt="" class="gate-half gate-right flicker">
 </div>
 
-<button class="enter-btn" onclick="enterGarden()">E N T E R</button>
+<button class="enter-btn" id="enter-btn" onclick="enterGarden()">E N T E R</button>
 <a href="index.html" style="display:inline-block;margin-top:20px;color:#555;font-family:'Georgia',serif;font-size:0.8em;letter-spacing:2px;text-decoration:none;border-bottom:1px solid #333;position:relative;z-index:5;">← Back to the World</a>
 
 <script src="js/main.js"></script>
@@ -133,8 +151,13 @@
 initAutoplay('dfXqxjMkyQ4'); // Cemetery Gates — The Smiths
 
 function enterGarden() {
+  document.getElementById('gate-scene').classList.add('open');
+  document.getElementById('enter-btn').disabled = true;
+  document.getElementById('enter-btn').style.opacity = '0.3';
   sessionStorage.setItem('gardenAutoplay', '1');
-  window.location.href = 'memorial-garden.html';
+  setTimeout(function() {
+    window.location.href = 'memorial-garden.html';
+  }, 1100);
 }
 </script>
 <script data-goatcounter="https://ponies4life.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
